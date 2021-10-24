@@ -19,6 +19,7 @@ export const handle = async ({ request, resolve }) => {
   }
 
   const response = await resolve(request);
+  console.log('request in hooks: ', request);
 
   return {
     ...response,
@@ -26,6 +27,10 @@ export const handle = async ({ request, resolve }) => {
       ...response.headers,
     },
   };
+};
+
+export const getContext = async ({headers}) => {
+
 };
 
 export const getSession = async (request) => {
