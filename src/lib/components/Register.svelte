@@ -40,9 +40,7 @@
   };
 </script>
 
-<h2>Register</h2>
-
-<form action="" on:submit|preventDefault="{register}">
+<form action="" on:submit|preventDefault="{register}" class="login-form">
   <div class="input-group">
     <label for="name">Name</label>
     <input type="text" name="name" bind:value="{name}" id="name" />

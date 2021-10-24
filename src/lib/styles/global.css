@@ -1,0 +1,136 @@
+:root {
+  font-size: 1rem;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+    'Helvetica Neue', sans-serif;
+
+  /* Colors */
+
+  /* HEX */
+  --tomato: #ff6347ff;
+  --orange-yellow-crayola: #fed766ff;
+  --blue-munsell: #009fb7ff;
+  --independence: #465775ff;
+  --cultured: #eff1f3ff;
+
+  /* RGB Base Values */
+  --tomato-rgb: 255, 99, 71;
+  --orange-yellow-crayola-rgb: 254, 215, 102;
+  --blue-munsell-rgb: 0, 159, 183;
+  --independence-rgb: 70, 87, 117;
+  --cultured-rgb: 239, 241, 243;
+
+  --primary-dark: #0f131a;
+  --primary-dark-rgb: 15, 19, 26;
+  --primary-light: var(--cultured);
+  --primary-light-rgb: var(--cultured-rgb);
+
+  --primary-dark-muted: rgb(var(--primary-dark-rgb), 0.2);
+  --primary-light-muted: rgb(var(--primary-light-rgb), 0.2);
+
+  --primary-dark-alpha-1: rgb(var(--primary-dark-rgb), 0.1);
+  --primary-light-alpha-1: rgb(var(--primary-light-rgb), 0.1);
+
+  --primary-fg: var(--primary-dark);
+  --primary-bg: var(--primary-light);
+  --primary-fg-muted: var(--primary-dark-muted);
+  --primary-bg-muted: var(--primary-light-muted);
+  --primary-fg-alpha-1: var(--primary-light-alpha-1);
+  --primary-bg-alpha-1: var(--primary-dark-alpha-1);
+
+  --link: var(--blue-munsell);
+  --hover: var(--tomato);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color: var(--primary-fg);
+  background-color: var(--primary-bg);
+  min-height: 100vh;
+}
+
+body,
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+  align-items: center;
+  padding: 2rem;
+  height: 100%;
+}
+
+a:not(class) {
+  color: var(--link);
+  transition: all 0.3s ease-out;
+}
+
+[href]:hover {
+  color: var(--hover);
+}
+
+::selection {
+  color: var(--primary-bg);
+  background: var(--primary-fg);
+}
+
+.btn-link {
+  display: inline;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  color: var(--link);
+  transition: all 0.3s ease-out;
+}
+
+.btn-link:hover {
+  color: var(--hover);
+}
+
+.login-form {
+  min-width: 300px;
+  max-width: 35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+input[type='text'],
+input[type='password'],
+input[type='email'] {
+  background-color: var(--primary-fg-alpha-1);
+  border: 1px solid var(--primary-fg-muted);
+  transition: all 0.3s ease-out;
+}
+
+input[type='text']:focus,
+input[type='password']:focus,
+input[type='email']:focus {
+  background-color: var(--primary-fg-alpha-1);
+  border-color: transparent;
+  outline: 1px solid var(--hover);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-fg: var(--primary-light);
+    --primary-bg: var(--primary-dark);
+    --primary-fg-muted: var(--primary-light-muted);
+    --primary-bg-muted: var(--primary-dark-muted);
+    --primary-bg-alpha-1: var(--primary-light-alpha-1);
+    --primary-fg-alpha-1: var(--primary-dark-alpha-1);
+  }
+}

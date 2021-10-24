@@ -31,9 +31,7 @@
   };
 </script>
 
-<h2>Login</h2>
-
-<form action="" on:submit|preventDefault="{login}">
+<form action="" on:submit|preventDefault="{login}" class="login-form">
   <div class="input-group">
     <label for="email">Email</label>
     <input type="email" name="email" id="email" bind:value="{email}" />
