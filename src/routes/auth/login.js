@@ -1,7 +1,7 @@
 import bcrypt from 'bcrypt';
 import * as cookie from 'cookie';
 import { v4 as uuidv4 } from 'uuid';
-import * as service from '../../lib/services/user.service.js';
+import service from '../../lib/services/user.service.js';
 import CookieService from '../../lib/services/cookie.service.js';
 import User from '../../lib/models/user.model.js';
 
@@ -18,7 +18,11 @@ export const post = async ({ body }) => {
         },
       };
     }
-    if (bcrypt.compare(body.password, user.password) !== true) {
+    console.log(
+      'password?: ',
+      await bcrypt.compare(body.password, user.password)
+    );
+    if ((await bcrypt.compare(body.password, user.password)) !== true) {
       return {
         status: 401,
         body: {
@@ -30,12 +34,13 @@ export const post = async ({ body }) => {
     const cookieId = uuidv4();
 
     const cookieResponse = await CookieService.findOne(body.email);
-    const duplicateUser = cookieResponse[0][0];
+    console.log('cookieResponse: ', cookieResponse);
+    const duplicateUser = cookieResponse ? cookieResponse[0][0] : null;
 
     if (duplicateUser) {
-      await CookieService.updateOne({ cookieId, email: body.email });
+      await CookieService.updateOne({ id: cookieId, email: body.email });
     } else {
-      await CookieService.insertOne({ cookieId, email: body.email });
+      await CookieService.insertOne({ id: cookieId, email: body.email });
     }
 
     const headers = {
@@ -52,6 +57,7 @@ export const post = async ({ body }) => {
       headers,
       body: {
         message: 'Successfully logged in!',
+        user: { name: user.name, userName: user.userName, email: user.email },
       },
     };
   } catch (error) {

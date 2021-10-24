@@ -3,7 +3,7 @@ import CookieService from './lib/services/cookie.service.js';
 
 export const handle = async ({ request, resolve }) => {
   const cookies = cookie.parse(request.headers.cookie || '');
-  request.locals.user = cookie;
+  request.locals.user = cookies;
 
   if (!cookies.session_id) {
     request.locals.user.authenticated = false;
@@ -18,7 +18,7 @@ export const handle = async ({ request, resolve }) => {
     request.locals.user.authenticated = false;
   }
 
-  const response = resolve(request);
+  const response = await resolve(request);
 
   return {
     ...response,
@@ -26,4 +26,15 @@ export const handle = async ({ request, resolve }) => {
       ...response.headers,
     },
   };
+};
+
+export const getSession = async (request) => {
+  return request.locals.user
+    ? {
+        user: {
+          authenticated: request.locals.user.authenticated,
+          email: request.locals.user.email,
+        },
+      }
+    : {};
 };

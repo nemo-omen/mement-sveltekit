@@ -7,7 +7,7 @@ import { testUsers, testNotes } from './demo.data.js';
 const { host, user, password, database, notesTable, userTable, cookiesTable } =
   config.get('db');
 
-console.log(config.get('db'));
+// console.log(config.get('db'));
 
 const connection = await mysql.createConnection({ host, user, password });
 
@@ -22,19 +22,23 @@ try {
   );
 
   if (create[0].serverStatus === 2)
-    console.log(`Database ${database} created or already exists.`);
+    console.log(`🗄️  Database ${database} created or already exists.`);
 
   const use = await connection.query(`USE ${database}`);
 
   if (use[0].serverStatus === 2) console.log(`Using database ${database}`);
 
-  console.log(`Dropping tables ${userTable}, ${notesTable} for testing...`);
+  console.log(
+    `🗑️  Dropping tables ${userTable}, ${notesTable}, ${cookiesTable} for testing...`
+  );
 
   await connection.query(`DROP TABLE IF EXISTS \`${notesTable}\``);
   await connection.query(`DROP TABLE IF EXISTS \`${userTable}\``);
   await connection.query(`DROP TABLE IF EXISTS \`${cookiesTable}\``);
 
-  console.log(`Attempting to create empty tables ${notesTable}, ${userTable}`);
+  console.log(
+    `   Attempting to create empty tables ${notesTable}, ${userTable}, ${cookiesTable}...`
+  );
 
   const createdUserTable =
     await connection.query(`CREATE TABLE IF NOT EXISTS \`${userTable}\`(
@@ -42,20 +46,12 @@ try {
       name varchar(255) NOT NULL,
       userName varchar(255) NOT NULL UNIQUE,
       email varchar(255) NOT NULL UNIQUE,
-      password varchar(255) NOT NULL,
-      token varchar(255)
+      password varchar(255) NOT NULL
       )ENGINE=InnoDB`);
 
   if (createdUserTable[0].serverStatus === 2) {
-    console.log(`Table ${userTable} created`);
+    console.log(`🗃️  Table ${userTable} created`);
     for (const user of testUsers) {
-      user.token = jwt.sign(
-        { user_id: 1, email: user.email },
-        process.env.TOKEN_KEY,
-        {
-          expiresIn: '15min',
-        }
-      );
       await connection.query(`INSERT INTO \`${userTable}\` SET ?`, user);
     }
   }
@@ -72,7 +68,7 @@ try {
     )ENGINE=InnoDB`);
 
   if (createdNotesTable[0].serverStatus === 2) {
-    console.log(`Table ${notesTable} created`);
+    console.log(`🗃️  Table ${notesTable} created`);
     for (const note of testNotes) {
       await connection.query(`INSERT INTO \`${notesTable}\` SET ?`, note);
     }
@@ -81,12 +77,14 @@ try {
   const createdCookiesTable =
     await connection.query(`CREATE TABLE IF NOT EXISTS \`${cookiesTable}\` (
     id char(36) NOT NULL PRIMARY KEY,
-    email varchar(255) NOT NULL,
+    email varchar(255) NOT NULL
   )ENGINE=InnoDB`);
 
   if (createdCookiesTable[0].serverStatus === 2) {
-    console.log(`Table ${cookiesTable} created`);
+    console.log(`🗃️  Table ${cookiesTable} created`);
   }
+
+  console.log("\n🚀 Setup complete. Looks like we're ready to go! 🚀\n");
 } catch (error) {
   console.error(error);
 }

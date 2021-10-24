@@ -1,9 +1,18 @@
-import * as db from '../db/db.js';
+import db from '$lib/db/db.js';
 
 class CookieService {
   static async findOne(cookieId) {
     try {
-      return db.query('SELECT * FROM cookies WHERE id = ?', cookieId);
+      if (cookieId) {
+        const cookieResponse = await db.query(
+          `SELECT * FROM cookies WHERE id = ?`,
+          cookieId
+        );
+        const cookie = cookieResponse[0][0];
+        return cookie;
+      } else {
+        return null;
+      }
     } catch (error) {
       console.error(error);
     }
