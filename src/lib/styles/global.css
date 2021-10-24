@@ -32,13 +32,15 @@
 
   --primary-fg: var(--primary-dark);
   --primary-bg: var(--primary-light);
+  --primary-fg-rgb: var(--primary-dark-rgb);
+  --primary-bg-rgb: var(--primary-light-rgb);
   --primary-fg-muted: var(--primary-dark-muted);
   --primary-bg-muted: var(--primary-light-muted);
   --primary-fg-alpha-1: var(--primary-light-alpha-1);
   --primary-bg-alpha-1: var(--primary-dark-alpha-1);
 
-  --link: var(--blue-munsell);
-  --hover: var(--tomato);
+  --link: var(--tomato);
+  --hover: var(--blue-munsell);
 }
 
 * {
@@ -54,14 +56,22 @@ body {
 }
 
 body,
-main {
+main,
+header {
   display: flex;
+}
+
+body,
+main {
   flex-direction: column;
+}
+
+header {
+  justify-content: space-between;
 }
 
 main {
   flex-grow: 1;
-  align-items: center;
   padding: 2rem;
   height: 100%;
 }
@@ -80,19 +90,6 @@ a:not(class) {
   background: var(--primary-fg);
 }
 
-.btn-link {
-  display: inline;
-  cursor: pointer;
-  background: transparent;
-  border: none;
-  color: var(--link);
-  transition: all 0.3s ease-out;
-}
-
-.btn-link:hover {
-  color: var(--hover);
-}
-
 .login-form {
   min-width: 300px;
   max-width: 35rem;
@@ -108,29 +105,64 @@ a:not(class) {
   gap: 0.5rem;
 }
 
-input[type='text'],
-input[type='password'],
-input[type='email'] {
+input {
   background-color: var(--primary-fg-alpha-1);
-  border: 1px solid var(--primary-fg-muted);
+  outline: 1px solid var(--primary-fg-muted);
+  border: none;
   transition: all 0.3s ease-out;
+  padding: 0.25rem;
+  color: var(--primary-fg);
 }
 
-input[type='text']:focus,
-input[type='password']:focus,
-input[type='email']:focus {
+input:focus {
   background-color: var(--primary-fg-alpha-1);
   border-color: transparent;
   outline: 1px solid var(--hover);
+}
+
+input[type='submit'],
+button {
+  /* background: var(--primary-fg-muted); */
+  background: var(--link);
+  color: var(--primary-bg);
+  padding: 0.25rem;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+input[type='submit']:hover,
+button:hover {
+  /* background: rgb(var(--primary-fg-rgb), 0.3); */
+  background: var(--hover);
+  color: var(--primary-fg);
+}
+
+.btn-link {
+  display: inline;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  color: var(--link);
+  transition: all 0.3s ease-out;
+}
+
+.btn-link:hover {
+  color: var(--hover);
+  background-color: transparent;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --primary-fg: var(--primary-light);
     --primary-bg: var(--primary-dark);
+    --primary-bg-rgb: var(--primary-dark-rgb);
+    --primary-fg-rgb: var(--primary-light-rgb);
     --primary-fg-muted: var(--primary-light-muted);
     --primary-bg-muted: var(--primary-dark-muted);
     --primary-bg-alpha-1: var(--primary-light-alpha-1);
     --primary-fg-alpha-1: var(--primary-dark-alpha-1);
+
+    --link: var(--blue-munsell);
+    --hover: var(--tomato);
   }
 }

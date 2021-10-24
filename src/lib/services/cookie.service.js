@@ -4,10 +4,21 @@ class CookieService {
   static async findOne(cookieId) {
     try {
       if (cookieId) {
-        const cookieResponse = await db.query(
-          `SELECT * FROM cookies WHERE id = ?`,
-          cookieId
-        );
+        const cookieResponse = await db.query(`SELECT * FROM cookies WHERE id = ?`, cookieId);
+        const cookie = cookieResponse[0][0];
+        return cookie;
+      } else {
+        return null;
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  static async findOneByEmail(email) {
+    try {
+      if (email) {
+        const cookieResponse = await db.query(`SELECT * FROM cookies WHERE email = ?`, email);
         const cookie = cookieResponse[0][0];
         return cookie;
       } else {
@@ -28,11 +39,7 @@ class CookieService {
 
   static async updateOne(cookie) {
     try {
-      return await db.query(
-        'UPDATE cookies SET ? WHERE email = ?',
-        cookie,
-        cookie.email
-      );
+      return await db.query('UPDATE cookies SET ? WHERE email = ?', cookie, cookie.email);
     } catch (error) {
       console.error(error);
     }

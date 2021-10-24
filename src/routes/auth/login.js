@@ -3,11 +3,11 @@ import * as cookie from 'cookie';
 import { v4 as uuidv4 } from 'uuid';
 import service from '../../lib/services/user.service.js';
 import CookieService from '../../lib/services/cookie.service.js';
-import User from '../../lib/models/user.model.js';
 
 export const post = async ({ body }) => {
   try {
     const response = await service.getByEmail(body.email);
+
     const user = response[0][0];
 
     if (!user) {
@@ -18,10 +18,8 @@ export const post = async ({ body }) => {
         },
       };
     }
-    console.log(
-      'password?: ',
-      await bcrypt.compare(body.password, user.password)
-    );
+
+    console.log('password?: ', await bcrypt.compare(body.password, user.password));
     if ((await bcrypt.compare(body.password, user.password)) !== true) {
       return {
         status: 401,
@@ -33,8 +31,9 @@ export const post = async ({ body }) => {
 
     const cookieId = uuidv4();
 
-    const cookieResponse = await CookieService.findOne(body.email);
+    const cookieResponse = await CookieService.findOneByEmail(body.email);
     console.log('cookieResponse: ', cookieResponse);
+
     const duplicateUser = cookieResponse ? cookieResponse[0][0] : null;
 
     if (duplicateUser) {
