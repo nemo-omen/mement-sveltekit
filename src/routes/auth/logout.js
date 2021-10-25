@@ -5,7 +5,7 @@ export const post = async ({ body }) => {
   let cookieId;
 
   const cookieResponse = await CookieService.findOneByEmail(body.email);
-  if (cookieResponse.id) {
+  if (cookieResponse?.id) {
     cookieId = cookieResponse.id;
     await CookieService.deleteOne(cookieResponse.id);
   }

@@ -34,7 +34,7 @@ export const post = async ({ body }) => {
     const cookieResponse = await CookieService.findOneByEmail(body.email);
     console.log('cookieResponse: ', cookieResponse);
 
-    const duplicateUser = cookieResponse ? cookieResponse[0][0] : null;
+    const duplicateUser = cookieResponse ? cookieResponse : null;
 
     if (duplicateUser) {
       await CookieService.updateOne({ id: cookieId, email: body.email });

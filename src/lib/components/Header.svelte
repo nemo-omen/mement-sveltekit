@@ -1,42 +1,17 @@
 <script>
-  import { goto } from '$app/navigation';
-  import { onMount, afterUpdate } from 'svelte';
   import { userStore } from '$lib/stores/user.store.js';
+  import { goto } from '$app/navigation';
+  import { createEventDispatcher } from 'svelte';
   import MementIcon from './MementIcon.svelte';
+  import Nav from '$lib/components/Nav.svelte';
 
-  let email;
-  let name;
-  let userName;
-  let errorMessage;
+  const dispatch = createEventDispatcher();
 
-  async function logOut() {
-    try {
-      const response = fetch('/auth/logout', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: $userStore.email }),
-      });
-
-      if (!response.ok) {
-        errorMessage = response.message;
-      }
-
-      $userStore = null;
-      goto('/');
-    } catch (error) {
-      errorMessage = error.message;
-    }
+  function goToLogin() {
+    console.log('FUUUUUCK!');
+    $userStore = null;
+    goto('/');
   }
-
-  onMount(() => {
-    if ($userStore) {
-      email = $userStore.email;
-      name = $userStore.name;
-      userName = $userStore.userName;
-    }
-  });
 </script>
 
 <header>
@@ -47,17 +22,12 @@
   </div>
   <div class="user-control">
     {#if $userStore}
-      <nav>
-        <a href="/profile">
-          {$userStore.userName}
-        </a>
-        <button class="btn-link" on:click="{logOut}">Log Out</button>
-      </nav>
+      <Nav on:logout="{goToLogin}" />
     {/if}
   </div>
 </header>
 
-<style>
+<style lang="scss">
   header {
     padding: 1rem 2rem;
     justify-content: space-between;
@@ -72,14 +42,5 @@
   }
   #site-icon a:hover {
     color: #ff6347;
-  }
-
-  .user-control {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-  .user-control a {
-    text-decoration: none;
   }
 </style>
