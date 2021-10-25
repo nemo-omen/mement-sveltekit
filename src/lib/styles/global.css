@@ -41,6 +41,8 @@
 
   --link: var(--tomato);
   --hover: var(--blue-munsell);
+  --link-rgb: var(--tomato-rgb);
+  --hover-rgb: var(--blue-munsell-rgb);
 }
 
 * {
@@ -164,5 +166,7 @@ button:hover {
 
     --link: var(--blue-munsell);
     --hover: var(--tomato);
+    --hover-rgb: var(--tomato-rgb);
+    --link-rgb: var(--blue-munsell-rgb);
   }
 }
