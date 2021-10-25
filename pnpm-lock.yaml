@@ -2,6 +2,8 @@ lockfileVersion: 5.3
 
 specifiers:
   '@sveltejs/kit': next
+  '@xstate/fsm': ^1.6.2
+  '@xstate/svelte': ^0.2.0
   bcrypt: ^5.0.1
   config: ^3.3.6
   cookie: ^0.4.1
@@ -13,14 +15,18 @@ specifiers:
   svelte: ^3.42.6
   svelte-preprocess: ^4.9.8
   uuid: ^8.3.2
+  xstate: ^4.25.0
 
 dependencies:
+  '@xstate/fsm': 1.6.2
+  '@xstate/svelte': 0.2.0_df8bccb4388102d55003b934016bee72
   bcrypt: 5.0.1
   config: 3.3.6
   cookie: 0.4.1
   mysql2: 2.3.2
   string: 3.3.3
   uuid: 8.3.2
+  xstate: 4.25.0
 
 devDependencies:
   '@sveltejs/kit': 1.0.0-next.189_svelte@3.44.0
@@ -142,6 +148,27 @@ packages:
     dependencies:
       '@types/node': 16.11.4
     dev: true
+
+  /@xstate/fsm/1.6.2:
+    resolution: {integrity: sha512-vOfiFVQu9mQceA8oJ3PcA4vwhtyo/j/mbVDVIlHDOh3iuiTqMnp805zZ3QsouRdO2Ie3B7n3jMw8BntI74fZxg==}
+    dev: false
+
+  /@xstate/svelte/0.2.0_df8bccb4388102d55003b934016bee72:
+    resolution: {integrity: sha512-SwPEz0oY6T4B4xvFFqJsuXfNyA0PoEhkrbO3jDQ6fXhwx/x9+Y38mM5w+qGnPtczI7UJ+T0XKWn5GJJsH4JbRA==}
+    peerDependencies:
+      '@xstate/fsm': ^1.0.0
+      svelte: ^3.24.1
+      xstate: ^4.11.0
+    peerDependenciesMeta:
+      '@xstate/fsm':
+        optional: true
+      xstate:
+        optional: true
+    dependencies:
+      '@xstate/fsm': 1.6.2
+      svelte: 3.44.0
+      xstate: 4.25.0
+    dev: false
 
   /abbrev/1.1.1:
     resolution: {integrity: sha512-nne9/IiQ/hzIhY6pdDnbBtz7DjPTKrY00P/zvPSm5pOFkl6xuGrGnXn/VtTNNfNtAfZ9/1RtehkszU9qcTii0Q==}
@@ -1989,6 +2016,10 @@ packages:
 
   /wrappy/1.0.2:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
+
+  /xstate/4.25.0:
+    resolution: {integrity: sha512-qP7lc/ypOuuWME4ArOBnzaCa90TfHkjiqYDmxpiCjPy6FcXstInA2vH6qRVAHbPXRK4KQIYfIEOk1X38P+TldQ==}
+    dev: false
 
   /y18n/4.0.3:
     resolution: {integrity: sha512-JKhqTOwSrqNA1NY5lSztJ1GrBiUodLMmIZuLiDaMRJ+itFd+ABVE8XBjOvIWL+rSqNDC74LCSFmlb/U4UZ4hJQ==}

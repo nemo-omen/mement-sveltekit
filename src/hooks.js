@@ -2,8 +2,6 @@ import * as cookie from 'cookie';
 import CookieService from './lib/services/cookie.service.js';
 
 export const handle = async ({ request, resolve }) => {
-  console.log('path requested: ', request.path);
-
   const cookies = cookie.parse(request.headers.cookie || '');
   request.locals.user = cookies;
 

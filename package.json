@@ -18,11 +18,14 @@
   },
   "type": "module",
   "dependencies": {
+    "@xstate/fsm": "^1.6.2",
+    "@xstate/svelte": "^0.2.0",
     "bcrypt": "^5.0.1",
     "config": "^3.3.6",
     "cookie": "^0.4.1",
     "mysql2": "^2.3.2",
     "string": "^3.3.3",
-    "uuid": "^8.3.2"
+    "uuid": "^8.3.2",
+    "xstate": "^4.25.0"
   }
 }
