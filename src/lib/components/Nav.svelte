@@ -19,7 +19,7 @@
 				errorMessage = response.message;
 			} else {
 				$userStore = null;
-				authService.send('UNAUTH_SUCCESS');
+				authService.send('DEAUTH_SUCCESS');
 			}
 		} catch (error) {
 			errorMessage = error.message;
