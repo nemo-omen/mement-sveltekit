@@ -31,12 +31,12 @@
 				authService.send('AUTH_SUCCESS');
 			} else {
 				authService.send('AUTH_FAILURE');
-				error = 'An error occurred.';
+				error = 'Whoah! Something went wrong with registration.';
 			}
 		} catch (error) {
 			authService.send('AUTH_FAILURE');
 			console.error(error);
-			error = 'An error occurred';
+			error = 'Whoah! Something went wrong with registration.';
 		}
 	};
 </script>

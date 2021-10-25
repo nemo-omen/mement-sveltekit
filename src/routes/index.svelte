@@ -60,11 +60,13 @@
 </script>
 
 {#if $authService.matches('authorized')}
-	<section id="home">
-		<div class="major-logo">
-			<MementIcon />
-		</div>
-		{$authService.value}
+	<section id="workspace">
+		<aside id="workspace-sidebar">
+			<h3>Your Documents</h3>
+		</aside>
+		<section id="editor">
+			<h3>Document Name</h3>
+		</section>
 	</section>
 {:else}
 	<section id="login">
@@ -88,9 +90,8 @@
 	</section>
 {/if}
 
-<style>
-	#login,
-	#home {
+<style lang="scss">
+	#login {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -102,5 +103,20 @@
 	.major-logo {
 		font-size: 10rem;
 		color: var(--link);
+	}
+
+	#workspace {
+		display: grid;
+		grid-template-columns: 20vw 77vw;
+		flex-grow: 1;
+		min-height: 100%;
+	}
+
+	#workspace-sidebar {
+		border-right: var(--primary-fg-muted);
+	}
+
+	#editor {
+		overflow-y: scroll;
 	}
 </style>
