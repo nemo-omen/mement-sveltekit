@@ -36,7 +36,7 @@ try {
   await connection.query(`DROP TABLE IF EXISTS \`${userTable}\``);
   await connection.query(`DROP TABLE IF EXISTS \`${cookiesTable}\``);
 
-  console.log(
+  console.log( 
     `   Attempting to create empty tables ${notesTable}, ${userTable}, ${cookiesTable}...`
   );
 
