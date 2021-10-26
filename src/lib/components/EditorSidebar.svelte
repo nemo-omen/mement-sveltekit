@@ -18,7 +18,9 @@
     <IconButton name="doc" size="3" dispatchFn="expand" on:expand="{() => handleIconClick('docs')}" />
     <IconButton name="user" size="3" dispatchFn="expand" on:expand="{() => handleIconClick('user')}" />
   </div>
-  {#if expanded}{/if}
+  {#if $menuService.matches('expanded')}
+    {$menuService.context.currentMenu}
+  {/if}
 </aside>
 
 <style>
