@@ -18,6 +18,8 @@
   },
   "type": "module",
   "dependencies": {
+    "@codemirror/state": "^0.19.2",
+    "@codemirror/view": "^0.19.9",
     "@xstate/fsm": "^1.6.2",
     "@xstate/svelte": "^0.2.0",
     "bcrypt": "^5.0.1",
