@@ -1,40 +1,67 @@
 <script>
+  import { onMount } from 'svelte';
   import { browser } from '$app/env';
+  import * as monaco from 'monaco-editor';
+  import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
+  import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
+  import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
+  import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
+  import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
   import Toolbar from '$lib/components/Toolbar.svelte';
-  import Header from './Header.svelte';
-  import { EditorView } from '@codemirror/view';
-  import { EditorState } from '@codemirror/state';
 
   let editor;
-
-  function logKeypress(event) {}
-
-  function handleSelection(event) {
-    const selection = document.getSelection();
-    const start = editor.selectionStart;
-    const end = editor.selectionEnd;
-    // let selection = editor.value.substring(start, end);
-    // selection = '[[' + selection + ']]';
-    console.log(selection);
+  if (browser) {
+    self.MonacoEnvironment = {
+      getWorker(_, label) {
+        if (label === 'json') {
+          return new jsonWorker();
+        }
+        if (label === 'css' || label === 'scss' || label === 'less') {
+          return new cssWorker();
+        }
+        if (label === 'html' || label === 'handlebars' || label === 'razor') {
+          return new htmlWorker();
+        }
+        if (label === 'typescript' || label === 'javascript') {
+          return new tsWorker();
+        }
+        return new editorWorker();
+      },
+    };
   }
+
+  onMount(() => {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    console.log('matchMedia dark?: ', isDark);
+    monaco.editor.defineTheme('mementTheme', {
+      base: isDark ? 'vs-dark' : 'vs',
+      inherit: true,
+      rules: [{ background: '#eff1f3ff' }],
+      colors: {
+        'editor.foreground': '#eff1f3ff',
+        'editor.background': '#0f131a',
+      },
+    });
+
+    monaco.editor.setTheme('mementTheme');
+    monaco.editor.create(editor, {
+      value: '## Welcome to the Editor!!',
+      language: 'markdown',
+    });
+  });
 </script>
 
 <section id="editor-pane">
   <Toolbar />
-  <div
-    class="editor"
-    on:keypress="{logKeypress}"
-    on:select="{handleSelection}"
-    bind:this="{editor}"
-    contenteditable="true">
-  </div>
+  <div class="editor" bind:this="{editor}"></div>
 </section>
 
 <style lang="scss">
   .editor {
     font-size: 1rem;
     line-height: 1.5;
-    font-family: 'Courier New', Courier, monospace;
+    // font-family: 'Courier New', Courier, monospace;
     min-height: 90%;
     min-width: 100%;
     background-color: var(--primary-bg);
