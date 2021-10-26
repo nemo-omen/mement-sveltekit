@@ -107,8 +107,9 @@
 
   #workspace {
     display: grid;
-    grid-template-columns: 20vw 77vw;
+    grid-template-columns: auto 1fr;
     flex-grow: 1;
     min-height: 100%;
+    min-width: 100%;
   }
 </style>

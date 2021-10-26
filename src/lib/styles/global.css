@@ -55,6 +55,7 @@ body {
   color: var(--primary-fg);
   background-color: var(--primary-bg);
   min-height: 100vh;
+  overflow: hidden;
 }
 
 body,

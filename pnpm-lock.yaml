@@ -18,6 +18,7 @@ specifiers:
   svelte: ^3.42.6
   svelte-preprocess: ^4.9.8
   uuid: ^8.3.2
+  vite-plugin-monaco-editor: ^1.0.6
   xstate: ^4.25.0
 
 dependencies:
@@ -41,6 +42,7 @@ devDependencies:
   prettier-plugin-svelte: 2.4.0_prettier@2.4.1+svelte@3.44.0
   svelte: 3.44.0
   svelte-preprocess: 4.9.8_node-sass@6.0.1+svelte@3.44.0
+  vite-plugin-monaco-editor: 1.0.6_monaco-editor@0.29.1
 
 packages:
 
@@ -2043,6 +2045,14 @@ packages:
       assert-plus: 1.0.0
       core-util-is: 1.0.2
       extsprintf: 1.3.0
+    dev: true
+
+  /vite-plugin-monaco-editor/1.0.6_monaco-editor@0.29.1:
+    resolution: {integrity: sha512-PbAc45pIm/g53ZlvjdIZ9vzGx5kabKkdY1dXW0pu2KUJekqWtDKb9c9kd/o8fQ6/B8PbhWoai2oC9r14RqQXtA==}
+    peerDependencies:
+      monaco-editor: 0.29.x
+    dependencies:
+      monaco-editor: 0.29.1
     dev: true
 
   /vite/2.6.11:
