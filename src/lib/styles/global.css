@@ -6,9 +6,10 @@
   /* Colors */
 
   /* HEX */
-  --tomato: #ff6347ff;
+  --tomato: #ff6347;
   --orange-yellow-crayola: #fed766ff;
   --blue-munsell: #009fb7ff;
+  --process-cyan: #5bc0eb;
   --independence: #465775ff;
   --cultured: #eff1f3ff;
 
@@ -40,7 +41,8 @@
   --primary-bg-alpha-1: var(--primary-dark-alpha-1);
 
   --link: var(--tomato);
-  --hover: var(--blue-munsell);
+  /* --hover: var(--blue-munsell); */
+  --hover: var(--process-cyan);
   --link-rgb: var(--tomato-rgb);
   --hover-rgb: var(--blue-munsell-rgb);
 }
@@ -165,7 +167,8 @@ button:hover {
     --primary-bg-alpha-1: var(--primary-light-alpha-1);
     --primary-fg-alpha-1: var(--primary-dark-alpha-1);
 
-    --link: var(--blue-munsell);
+    /* --link: var(--blue-munsell); */
+    --link: var(--process-cyan);
     --hover: var(--tomato);
     --hover-rgb: var(--tomato-rgb);
     --link-rgb: var(--blue-munsell-rgb);

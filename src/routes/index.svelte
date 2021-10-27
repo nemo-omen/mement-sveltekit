@@ -29,6 +29,10 @@
 
   let login = true;
 
+  if (authenticated) {
+    authService.send('PREAUTH');
+  }
+
   authService.onTransition((state) => {
     if (state.value === 'authorized') {
       setUserStore();
@@ -36,7 +40,8 @@
   });
 
   async function setUserStore() {
-    const response = await fetch('/auth/user', {
+    // const response = await fetch('/auth/user', {
+    const response = await fetch('/auth', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

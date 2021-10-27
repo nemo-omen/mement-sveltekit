@@ -13,7 +13,7 @@
   }
 </script>
 
-<button class="icon-button" style="font-size: {size}" on:click="{sendDispatch}">
+<button class="icon-button" style="font-size: {size}rem" on:click="{sendDispatch}">
   <Icon name="{name}" />
 </button>
 
@@ -30,7 +30,7 @@
     padding: 0.5rem;
   }
   .icon-button:hover {
-    color: var(--primary-bg);
-    background-color: rgba(var(--link-rgb), 0.3);
+    color: var(--hover);
+    /* background-color: rgba(var(--link-rgb), 0.3); */
   }
 </style>

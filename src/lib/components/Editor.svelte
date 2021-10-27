@@ -1,3 +1,7 @@
+<script context="module">
+  export const ssr = false;
+</script>
+
 <script>
   import { onMount } from 'svelte';
   import { browser } from '$app/env';
@@ -11,54 +15,34 @@
 
   let editor;
 
-  if (browser) {
-    // self.MonacoEnvironment = {
-    // 	getWorker(_, label) {
-    // 		if (label === 'json') {
-    // 			return new jsonWorker();
-    // 		}
-    // 		if (label === 'css' || label === 'scss' || label === 'less') {
-    // 			return new cssWorker();
-    // 		}
-    // 		if (label === 'html' || label === 'handlebars' || label === 'razor') {
-    // 			return new htmlWorker();
-    // 		}
-    // 		if (label === 'typescript' || label === 'javascript') {
-    // 			return new tsWorker();
-    // 		}
-    // 		return new editorWorker();
-    // 	}
-    // };
+  onMount(() => {
+    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    onMount(() => {
-      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    console.log('matchMedia dark?: ', isDark);
 
-      console.log('matchMedia dark?: ', isDark);
-
-      monaco.editor.defineTheme('mementTheme', {
-        base: isDark ? 'vs-dark' : 'vs',
-        inherit: true,
-        rules: [{ background: '#eff1f3ff' }],
-        colors: {
-          'editor.foreground': isDark ? '#eff1f3ff' : '#0f131a',
-          'editor.background': isDark ? '#0f131a' : '#eff1f3ff',
-          'editorOverviewRuler.border': 'none',
-          // 'minimap.background': isDark ? '#eff1f3ff' : '#0f131a',
-          // 'minimap.foreground': isDark ? '#0f131a' : '#eff1f3ff',
-        },
-      });
-
-      monaco.editor.setTheme('mementTheme');
-
-      monaco.editor.create(editor, {
-        value: '## Welcome to the Editor!!',
-        language: 'markdown',
-        minimap: {
-          enabled: false,
-        },
-      });
+    monaco.editor.defineTheme('mementTheme', {
+      base: isDark ? 'vs-dark' : 'vs',
+      inherit: true,
+      rules: [{ background: '#eff1f3ff' }],
+      colors: {
+        'editor.foreground': isDark ? '#eff1f3ff' : '#0f131a',
+        'editor.background': isDark ? '#0f131a' : '#eff1f3ff',
+        'editorOverviewRuler.border': 'none',
+        // 'minimap.background': isDark ? '#eff1f3ff' : '#0f131a',
+        // 'minimap.foreground': isDark ? '#0f131a' : '#eff1f3ff',
+      },
     });
-  }
+
+    monaco.editor.setTheme('mementTheme');
+
+    monaco.editor.create(editor, {
+      value: '## Welcome to the Editor!!',
+      language: 'markdown',
+      minimap: {
+        enabled: false,
+      },
+    });
+  });
 </script>
 
 <section id="editor-pane">

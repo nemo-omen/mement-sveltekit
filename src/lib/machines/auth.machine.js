@@ -1,4 +1,3 @@
-
 import { createMachine, assign, interpret } from 'xstate';
 
 const authMachine = createMachine({
@@ -11,11 +10,13 @@ const authMachine = createMachine({
     unauthorized: {
       on: {
         LOGIN: 'authorizing',
+        PREAUTH: 'authorized',
       },
     },
     authorizing: {
       on: {
         AUTH_SUCCESS: 'authorized',
+        AUTH_FAILURE: 'unauthorized',
       },
     },
     authorized: {
@@ -25,10 +26,10 @@ const authMachine = createMachine({
     },
     deauthorizing: {
       on: {
-        DEAUTH_SUCCESS: 'unauthorized'
+        DEAUTH_SUCCESS: 'unauthorized',
       },
     },
-  }
+  },
 });
 
 export const authService = interpret(authMachine).start();

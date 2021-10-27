@@ -9,11 +9,6 @@
 
   authService.onTransition((state) => {
     console.log(state.value);
-    // if (state.value === 'authorized') {
-    // 	if (browser) {
-    // 		goto('/home');
-    // 	}
-    // }
 
     if (state.value === 'unauthorized') {
       $userStore = null;
@@ -24,7 +19,7 @@
   });
 </script>
 
-<Header />
+<!-- <Header /> -->
 
 <main>
   <slot />
