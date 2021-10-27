@@ -46,16 +46,12 @@
   import Login from '$lib/components/Login.svelte';
   import Register from '$lib/components/Register.svelte';
   import EditorSidebar from '$lib/components/EditorSidebar.svelte';
-  import Editor from '$lib/components/Editor.svelte';
   import CMEditor from '$lib/components/CMEditor.svelte';
   import { userStore } from '$lib/stores/user.store.js';
   import MementIcon from '$lib/components/MementIcon.svelte';
   import { authService } from '$lib/machines/auth.machine.js';
 
-  // export let authenticated;
-  // export let email;
   export let user;
-  // $userStore = user;
 
   let login = true;
 
@@ -68,41 +64,12 @@
       $userStore = user;
     }
   });
-
-  // async function setUserStore() {
-  //   // const response = await fetch('/auth/user', {
-  //   const response = await fetch('/auth', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //     body: JSON.stringify({ email }),
-  //   });
-
-  //   let data;
-
-  //   if (response.ok) {
-  //     data = await response.json();
-  //   }
-
-  //   let user = {
-  //     id: data?.id,
-  //     authenticated,
-  //     email,
-  //     name: data?.name,
-  //     userName: data?.userName,
-  //   };
-
-  //   $userStore = user;
-  // }
 </script>
 
 {#if $authService.matches('authorized')}
   <section id="workspace">
     <EditorSidebar />
     <CMEditor />
-    <!-- <Editor /> -->
-    <!-- <CMEditor /> -->
   </section>
 {:else}
   <section id="login">

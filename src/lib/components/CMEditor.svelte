@@ -1,7 +1,6 @@
 <script>
   import CodeMirror from '$lib/components/CodeMirror.svelte';
   import 'codemirror/mode/markdown/markdown.js';
-  import Prism from 'prismjs';
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
   import Toolbar from '$lib/components/Toolbar.svelte';

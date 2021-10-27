@@ -205,7 +205,7 @@
   .codemirror-container :global(.CodeMirror) {
     height: 100%;
     background: transparent;
-    font: 400 14px/1.7 var(--font-mono);
+    font: 400 1rem/1.7 var(--font-mono);
     color: var(--base);
   }
   .codemirror-container.flex :global(.CodeMirror) {
@@ -215,7 +215,7 @@
     padding: 0;
   }
   .codemirror-container :global(.CodeMirror-gutters) {
-    padding: 0 16px 0 8px;
+    padding: 0 0.5rem 0 0.5rem;
     border: none;
   }
   .codemirror-container :global(.error-loc) {
@@ -225,6 +225,11 @@
   .codemirror-container :global(.error-line) {
     background-color: rgba(200, 0, 0, 0.05);
   }
+
+  :global(.CodeMirror-cursors) {
+    border-left-width: 3px !important;
+  }
+
   textarea {
     visibility: hidden;
   }
