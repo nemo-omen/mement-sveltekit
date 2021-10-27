@@ -6,43 +6,71 @@
   import { onMount } from 'svelte';
   import { browser } from '$app/env';
   import * as monaco from 'monaco-editor';
-  // import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-  // import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
-  // import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
-  // import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
-  // import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
+  import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
+  import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
+  import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
+  import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
+  import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
   import Toolbar from '$lib/components/Toolbar.svelte';
 
   let editor;
+  let monEditor;
+  let Monaco;
 
-  onMount(() => {
-    const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (browser) {
+    onMount(async () => {
+      const isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    console.log('matchMedia dark?: ', isDark);
+      try {
+        self.MonacoEnvironment = {
+          getWorker: function (_moduleId, label) {
+            if (label === 'json') {
+              return new jsonWorker();
+            }
+            if (label === 'css' || label === 'scss' || label === 'less') {
+              return new cssWorker();
+            }
+            if (label === 'html' || label === 'handlebars' || label === 'razor') {
+              return new htmlWorker();
+            }
+            if (label === 'typescript' || label === 'javascript') {
+              return new tsWorker();
+            }
+            return new editorWorker();
+          },
+        };
+        Monaco = await import('monaco-editor');
 
-    monaco.editor.defineTheme('mementTheme', {
-      base: isDark ? 'vs-dark' : 'vs',
-      inherit: true,
-      rules: [{ background: '#eff1f3ff' }],
-      colors: {
-        'editor.foreground': isDark ? '#eff1f3ff' : '#0f131a',
-        'editor.background': isDark ? '#0f131a' : '#eff1f3ff',
-        'editorOverviewRuler.border': 'none',
-        // 'minimap.background': isDark ? '#eff1f3ff' : '#0f131a',
-        // 'minimap.foreground': isDark ? '#0f131a' : '#eff1f3ff',
-      },
+        Monaco.editor.defineTheme('mementTheme', {
+          base: isDark ? 'vs-dark' : 'vs',
+          inherit: true,
+          rules: [{ background: '#eff1f3ff' }],
+          colors: {
+            'editor.foreground': isDark ? '#eff1f3ff' : '#0f131a',
+            'editor.background': isDark ? '#0f131a' : '#eff1f3ff',
+            'editorOverviewRuler.border': 'none',
+            // 'minimap.background': isDark ? '#eff1f3ff' : '#0f131a',
+            // 'minimap.foreground': isDark ? '#0f131a' : '#eff1f3ff',
+          },
+        });
+
+        Monaco.editor.setTheme('mementTheme');
+
+        Monaco.editor.create(editor, {
+          value: '## Welcome to the Editor!!',
+          language: 'markdown',
+          minimap: {
+            enabled: false,
+          },
+        });
+        return () => {
+          editor.dispose();
+        };
+      } catch (error) {
+        console.error(error);
+      }
     });
-
-    monaco.editor.setTheme('mementTheme');
-
-    monaco.editor.create(editor, {
-      value: '## Welcome to the Editor!!',
-      language: 'markdown',
-      minimap: {
-        enabled: false,
-      },
-    });
-  });
+  }
 </script>
 
 <section id="editor-pane">

@@ -1,14 +1,42 @@
 <script context="module">
+  export let ssr = false;
   export async function load({ page, fetch, session, stuff }) {
     let name;
     let userName;
     let email;
+    let authenticated;
     let id;
+
+    email = session.user.email;
+    authenticated = session.user.authenticated;
+
+    try {
+      const response = await fetch('/auth', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(email),
+      });
+
+      const data = await response.json();
+
+      userName = data.userName;
+      name = data.name;
+      id = data.id;
+    } catch (error) {
+      console.error(error);
+    }
 
     return {
       props: {
-        authenticated: session.user.authenticated,
-        email: session.user.email,
+        user: {
+          authenticated: authenticated,
+          email: email,
+          name: name,
+          userName: userName,
+          id: id,
+        },
       },
     };
   }
@@ -19,52 +47,53 @@
   import Register from '$lib/components/Register.svelte';
   import EditorSidebar from '$lib/components/EditorSidebar.svelte';
   import Editor from '$lib/components/Editor.svelte';
-  // import CMEditor from '$lib/components/CMEditor.svelte';
   import { userStore } from '$lib/stores/user.store.js';
   import MementIcon from '$lib/components/MementIcon.svelte';
   import { authService } from '$lib/machines/auth.machine.js';
 
-  export let authenticated;
-  export let email;
+  // export let authenticated;
+  // export let email;
+  export let user;
+  // $userStore = user;
 
   let login = true;
 
-  if (authenticated) {
+  if (user.authenticated) {
     authService.send('PREAUTH');
   }
 
   authService.onTransition((state) => {
     if (state.value === 'authorized') {
-      setUserStore();
+      $userStore = user;
     }
   });
 
-  async function setUserStore() {
-    // const response = await fetch('/auth/user', {
-    const response = await fetch('/auth', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ email }),
-    });
+  // async function setUserStore() {
+  //   // const response = await fetch('/auth/user', {
+  //   const response = await fetch('/auth', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //     body: JSON.stringify({ email }),
+  //   });
 
-    let data;
+  //   let data;
 
-    if (response.ok) {
-      data = await response.json();
-    }
+  //   if (response.ok) {
+  //     data = await response.json();
+  //   }
 
-    let user = {
-      id: data?.id,
-      authenticated,
-      email,
-      name: data?.name,
-      userName: data?.userName,
-    };
+  //   let user = {
+  //     id: data?.id,
+  //     authenticated,
+  //     email,
+  //     name: data?.name,
+  //     userName: data?.userName,
+  //   };
 
-    $userStore = user;
-  }
+  //   $userStore = user;
+  // }
 </script>
 
 {#if $authService.matches('authorized')}
