@@ -1,10 +1,13 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@joshnuss/svelte-codemirror': ^0.2.6
   '@sveltejs/kit': next
   '@xstate/fsm': ^1.6.2
   '@xstate/svelte': ^0.2.0
   bcrypt: ^5.0.1
+  codejar: ^3.5.0
+  codemirror: ^5.63.3
   config: ^3.3.6
   cookie: ^0.4.1
   i: ^0.3.7
@@ -14,6 +17,7 @@ specifiers:
   npm: ^8.1.1
   prettier: ^2.4.1
   prettier-plugin-svelte: ^2.4.0
+  prismjs: ^1.25.0
   string: ^3.3.3
   svelte: ^3.42.6
   svelte-preprocess: ^4.9.8
@@ -22,15 +26,19 @@ specifiers:
   xstate: ^4.25.0
 
 dependencies:
+  '@joshnuss/svelte-codemirror': 0.2.6_codemirror@5.63.3
   '@xstate/fsm': 1.6.2
   '@xstate/svelte': 0.2.0_df8bccb4388102d55003b934016bee72
   bcrypt: 5.0.1
+  codejar: 3.5.0
+  codemirror: 5.63.3
   config: 3.3.6
   cookie: 0.4.1
   i: 0.3.7
   monaco-editor: 0.29.1
   mysql2: 2.3.2
   npm: 8.1.1
+  prismjs: 1.25.0
   string: 3.3.3
   uuid: 8.3.2
   xstate: 4.25.0
@@ -66,6 +74,14 @@ packages:
       chalk: 2.4.2
       js-tokens: 4.0.0
     dev: true
+
+  /@joshnuss/svelte-codemirror/0.2.6_codemirror@5.63.3:
+    resolution: {integrity: sha512-YeKdLqbakWY5OR1KILGm8/aCZOLUjyUh1Nlak8YY/dGXsPmupgC/B37R2Jj3WsTSL17vZruaAusLR/oNIpUttQ==}
+    peerDependencies:
+      codemirror: ^5.61.0
+    dependencies:
+      codemirror: 5.63.3
+    dev: false
 
   /@mapbox/node-pre-gyp/1.0.6:
     resolution: {integrity: sha512-qK1ECws8UxuPqOA8F5LFD90vyVU33W7N3hGfgsOVfrJaRVc8McC3JClTDHpeSbL9CBrOHly/4GsNPAvIgNZE+g==}
@@ -374,6 +390,14 @@ packages:
     resolution: {integrity: sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=}
     engines: {node: '>=0.10.0'}
     dev: true
+
+  /codejar/3.5.0:
+    resolution: {integrity: sha512-uXrFZZ+yb23YY7+WtTux2Yyokt+Lty/kBnW/OhhEGp8IW8/lrJw5Gs1wwCyt2vpMfsVdudLmV5xAgYqsZY/49A==}
+    dev: false
+
+  /codemirror/5.63.3:
+    resolution: {integrity: sha512-1C+LELr+5grgJYqwZKqxrcbPsHFHapVaVAloBsFBASbpLnQqLw1U8yXJ3gT5D+rhxIiSpo+kTqN+hQ+9ialIXw==}
+    dev: false
 
   /color-convert/1.9.3:
     resolution: {integrity: sha512-QfAUtd+vFdAtFQcC8CCyYt1fYWxSqAiK2cSD6zDB8N3cpsEBAvRxp9zOGg6G/SHHJYAT88/az/IuDGALsNVbGg==}
@@ -1507,6 +1531,10 @@ packages:
     engines: {node: '>=10.13.0'}
     hasBin: true
     dev: true
+
+  /prismjs/1.25.0:
+    resolution: {integrity: sha512-WCjJHl1KEWbnkQom1+SzftbtXMKQoezOCYs5rECqMN+jP+apI7ftoflyqigqzopSO3hMhTEb0mFClA8lkolgEg==}
+    dev: false
 
   /process-nextick-args/2.0.1:
     resolution: {integrity: sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==}

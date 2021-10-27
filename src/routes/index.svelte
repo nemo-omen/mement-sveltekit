@@ -47,6 +47,7 @@
   import Register from '$lib/components/Register.svelte';
   import EditorSidebar from '$lib/components/EditorSidebar.svelte';
   import Editor from '$lib/components/Editor.svelte';
+  import CMEditor from '$lib/components/CMEditor.svelte';
   import { userStore } from '$lib/stores/user.store.js';
   import MementIcon from '$lib/components/MementIcon.svelte';
   import { authService } from '$lib/machines/auth.machine.js';
@@ -99,7 +100,8 @@
 {#if $authService.matches('authorized')}
   <section id="workspace">
     <EditorSidebar />
-    <Editor />
+    <CMEditor />
+    <!-- <Editor /> -->
     <!-- <CMEditor /> -->
   </section>
 {:else}
