@@ -72,7 +72,9 @@
     border-right: none;
   }
   .sidebar-expanded {
-    width: 10vw;
+    width: 20ch;
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .sidebar-expanded > * + * {
