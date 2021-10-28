@@ -6,13 +6,19 @@
   import Toolbar from '$lib/components/Toolbar.svelte';
 
   let editor;
+  let CM;
+  onMount(async () => {
+    const module = await import('$lib/components/CodeMirror.svelte');
+    CM = module.default;
+  });
 </script>
 
 <div class="editor-pane">
   <Toolbar />
-  <CodeMirror
+  <svelte:component this="{CM}" />
+  <!-- <CodeMirror
     bind:this="{editor}"
     on:change="{(e) => {
       console.log('e', e.detail.value);
-    }}" />
+    }}" /> -->
 </div>

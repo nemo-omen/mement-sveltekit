@@ -7,10 +7,11 @@ const config = {
   kit: {
     // hydrate the <div id="svelte"> element in src/app.html
     // target: document.body,
+    // ssr: false,
     vite: () => ({
-      plugins: [
-        monacoEditorPlugin,
-      ]
+      optimizeDeps: {
+        include: ['codemirror'],
+      },
     }),
   },
 };

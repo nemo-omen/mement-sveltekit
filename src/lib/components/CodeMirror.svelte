@@ -22,6 +22,7 @@
   import 'codemirror/addon/fold/markdown-fold.js';
   import 'codemirror/addon/fold/comment-fold.js';
   import { onMount, createEventDispatcher } from 'svelte';
+  import { browser } from '$app/env';
   const dispatch = createEventDispatcher();
   export let readonly = false;
   export let flex = false;
@@ -44,6 +45,7 @@
     if (editor) editor.setValue(code);
     updating_externally = false;
   }
+
   export function update(new_code) {
     code = new_code;
     if (editor) {
