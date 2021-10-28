@@ -32,7 +32,6 @@ export const post = async ({ body }) => {
     const cookieId = uuidv4();
 
     const cookieResponse = await CookieService.findOneByEmail(body.email);
-    console.log('cookieResponse: ', cookieResponse);
 
     const duplicateUser = cookieResponse ? cookieResponse : null;
 

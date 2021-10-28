@@ -1,9 +1,13 @@
 <script context="module">
   export async function load({ page, fetch, session, stuff }) {
+    console.log('user in index session: ', session.user);
     return {
       props: {
         authenticated: session?.user.authenticated,
         email: session?.user.email,
+        userName: session?.user.userName,
+        name: session?.user.name,
+        id: session?.user.id,
       },
     };
   }
@@ -24,6 +28,9 @@
   // export let user;
   export let email;
   export let authenticated;
+  export let name;
+  export let userName;
+  export let id;
 
   let login = true;
 
@@ -31,12 +38,20 @@
     authService.send('PREAUTH');
   }
 
-  authService.onTransition((state) => {
-    if (state.value === 'authorized') {
-      // $userStore = user;
-      goto('/editor');
-    }
-  });
+  if (browser) {
+    authService.onTransition((state) => {
+      if (state.value === 'authorized') {
+        $userStore = {
+          id,
+          name,
+          userName,
+          email,
+          authenticated,
+        };
+        goto('/editor');
+      }
+    });
+  }
 </script>
 
 <section id="login">
