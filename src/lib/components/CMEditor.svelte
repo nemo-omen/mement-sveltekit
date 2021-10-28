@@ -3,6 +3,7 @@
   import 'codemirror/mode/markdown/markdown.js';
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
+  import { editorStore } from '$lib/stores/editor.store.js';
   import Toolbar from '$lib/components/Toolbar.svelte';
 
   let editor;
@@ -11,11 +12,15 @@
     const module = await import('$lib/components/CodeMirror.svelte');
     CM = module.default;
   });
+
+  function updateChange(event) {
+    $editorStore = { content: event.detail.value };
+  }
 </script>
 
 <div class="editor-pane">
   <Toolbar />
-  <svelte:component this="{CM}" />
+  <svelte:component this="{CM}" on:change="{updateChange}" />
   <!-- <CodeMirror
     bind:this="{editor}"
     on:change="{(e) => {

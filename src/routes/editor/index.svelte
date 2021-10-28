@@ -6,6 +6,7 @@
   import { onMount } from 'svelte';
   import { userStore } from '$lib/stores/user.store.js';
   import EditorSidebar from '$lib/components/EditorSidebar.svelte';
+  import DocumentPreview from '$lib/components/DocumentPreview.svelte';
   let EditorComponent;
 
   onMount(async () => {
@@ -19,12 +20,13 @@
 <section id="workspace">
   <EditorSidebar />
   <svelte:component this="{EditorComponent}" />
+  <DocumentPreview />
 </section>
 
 <style>
   #workspace {
     display: grid;
-    grid-template-columns: auto 1fr;
+    grid-template-columns: auto 1fr 1fr;
     flex-grow: 1;
     min-height: 100%;
     min-width: 100%;

@@ -25,6 +25,9 @@
     "cookie": "^0.4.1",
     "mysql2": "^2.3.2",
     "npm": "^8.1.1",
+    "rehype-stringify": "^9.0.2",
+    "remark": "^14.0.1",
+    "remark-rehype": "^10.0.0",
     "string": "^3.3.3",
     "uuid": "^8.3.2",
     "xstate": "^4.25.0"
