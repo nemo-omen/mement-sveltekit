@@ -10,3 +10,9 @@
   <Toolbar />
   <CodeMirror6 />
 </div>
+
+<style>
+  .editor-pane {
+    /* overflow-y: scroll; */
+  }
+</style>

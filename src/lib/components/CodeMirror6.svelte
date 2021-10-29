@@ -53,7 +53,8 @@
           // console.log('transaction state: ', transaction.state.doc.toString());
         },
         parent: cmEditor,
-        contentHeight: 600,
+        contentHeight: baseHeight,
+        lineWrapping: true,
       });
 
       const cmEdit = document.getElementById('editor');
@@ -74,19 +75,26 @@
 <style>
   #editor {
     min-height: 100%;
+    width: 100%;
     position: relative;
   }
   :global(.cm-content, .cm-gutter) {
-    height: calc(var(--baseHeight) * 1px);
-    overflow: auto;
+    height: calc((var(--baseHeight) - 64) * 1px);
   }
-  :global(.cm-gutters) {
+  :global(.cm-content) {
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+  }
+  :global(.cm-line) {
+    white-space: pre-wrap;
+  }
+  /* :global(.cm-gutters) {
     margin: 1px;
-  }
-  :global(.cm-scroller) {
-    overflow: auto;
-  }
-  :global(.cm-wrap) {
+  } */
+  /* :global(.cm-scroller) {
+    overflow-y: auto;
+  } */
+  /* :global(.cm-wrap) {
     border: 1px solid silver;
-  }
+  } */
 </style>
