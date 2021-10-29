@@ -39,7 +39,7 @@
 <style>
   #workspace {
     display: grid;
-    grid-template-columns: auto 50% 50%;
+    grid-template-columns: auto 1fr 1fr;
     flex-grow: 1;
     /* min-height: 100%; */
     max-width: 100%;
