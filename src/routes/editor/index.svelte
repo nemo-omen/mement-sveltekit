@@ -1,7 +1,6 @@
 <script context="module">
   export async function load({ page, fetch, session, stuff }) {
     const user = session?.user;
-    console.log('session in /editor: ', session);
 
     return {
       props: {

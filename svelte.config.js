@@ -6,10 +6,11 @@ const config = {
   kit: {
     // hydrate the <div id="svelte"> element in src/app.html
     // target: document.body,
-    // ssr: false,
+    ssr: false,
     vite: () => ({
       optimizeDeps: {
-        include: ['codemirror', 'remark', 'remark-rehype', 'rehype-stringify'],
+        include: ['codemirror'],
+        keepNames: true,
       },
     }),
   },

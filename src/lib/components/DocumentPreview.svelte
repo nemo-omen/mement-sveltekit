@@ -1,16 +1,15 @@
 <script>
   import { editorStore } from '$lib/stores/editor.store.js';
   import { onMount, afterUpdate } from 'svelte';
-  // import { remark } from 'remark';
-  // import remarkRehype from 'remark-rehype';
-  // import rehypeStringify from 'rehype-stringify';
+  import { remark } from 'remark';
+  import remarkRehype from 'remark-rehype';
+  import rehypeStringify from 'rehype-stringify';
 
   $: content = '';
 
-  // $: unParsed = $editorStore.content;
+  $: unParsed = $editorStore.content;
 
   // function parseContent(mdString) {}
-
   onMount(() => {
     remark()
       .use(remarkRehype)

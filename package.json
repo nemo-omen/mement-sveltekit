@@ -10,9 +10,13 @@
   },
   "devDependencies": {
     "@sveltejs/kit": "next",
+    "codemirror": "^5.63.3",
     "node-sass": "^6.0.1",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
+    "rehype-stringify": "^9.0.2",
+    "remark": "^14.0.1",
+    "remark-rehype": "^10.0.0",
     "svelte": "^3.42.6",
     "svelte-preprocess": "^4.9.8",
     "vite-plugin-monaco-editor": "^1.0.6"
@@ -20,14 +24,10 @@
   "type": "module",
   "dependencies": {
     "bcrypt": "^5.0.1",
-    "codemirror": "^5.63.3",
     "config": "^3.3.6",
     "cookie": "^0.4.1",
     "mysql2": "^2.3.2",
     "npm": "^8.1.1",
-    "rehype-stringify": "^9.0.2",
-    "remark": "^14.0.1",
-    "remark-rehype": "^10.0.0",
     "string": "^3.3.3",
     "uuid": "^8.3.2",
     "xstate": "^4.25.0"

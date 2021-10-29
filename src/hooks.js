@@ -50,6 +50,10 @@ async function getUser(email) {
   return user;
 }
 
+export async function handleError({ error, request }) {
+  console.error(error, { request });
+}
+
 export const getSession = async (request) => {
   return request.locals.user
     ? {
