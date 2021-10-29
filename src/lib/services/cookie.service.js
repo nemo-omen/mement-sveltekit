@@ -4,7 +4,7 @@ class CookieService {
   static async findOne(cookieId) {
     try {
       if (cookieId) {
-        const cookieResponse = await db.query(`SELECT * FROM cookies WHERE id = ?`, cookieId);
+        const cookieResponse = await db.query(`SELECT * FROM cookies WHERE session_id = ?`, cookieId);
         const cookie = cookieResponse[0][0];
         return cookie;
       } else {

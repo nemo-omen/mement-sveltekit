@@ -1,23 +1,35 @@
 <script>
   import { editorStore } from '$lib/stores/editor.store.js';
   import { onMount, afterUpdate } from 'svelte';
-  import { remark } from 'remark';
-  import remarkRehype from 'remark-rehype';
-  import rehypeStringify from 'rehype-stringify';
+  // import { remark } from 'remark';
+  // import remarkRehype from 'remark-rehype';
+  // import rehypeStringify from 'rehype-stringify';
 
   $: content = '';
 
-  $: unParsed = $editorStore.content;
+  // $: unParsed = $editorStore.content;
 
-  function parseContent(mdString) {}
+  // function parseContent(mdString) {}
 
-  $: parsed = remark()
-    .use(remarkRehype)
-    .use(rehypeStringify)
-    .process(unParsed)
-    .then((file) => {
-      content = String(file);
-    });
+  onMount(() => {
+    remark()
+      .use(remarkRehype)
+      .use(rehypeStringify)
+      .process(unParsed)
+      .then((file) => {
+        content = String(file);
+      });
+  });
+
+  afterUpdate(() => {
+    remark()
+      .use(remarkRehype)
+      .use(rehypeStringify)
+      .process(unParsed)
+      .then((file) => {
+        content = String(file);
+      });
+  });
 </script>
 
 <div class="preview-pane">

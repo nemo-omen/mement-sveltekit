@@ -1,5 +1,4 @@
 import sveltePreprocess from 'svelte-preprocess';
-import monacoEditorPlugin from 'vite-plugin-monaco-editor';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -10,7 +9,7 @@ const config = {
     // ssr: false,
     vite: () => ({
       optimizeDeps: {
-        include: ['codemirror'],
+        include: ['codemirror', 'remark', 'remark-rehype', 'rehype-stringify'],
       },
     }),
   },

@@ -1,5 +1,14 @@
 <script context="module">
-  // export async function load({ page, fetch, session, stuff }) {}
+  export async function load({ page, fetch, session, stuff }) {
+    const user = session?.user;
+    console.log('session in /editor: ', session);
+
+    return {
+      props: {
+        user,
+      },
+    };
+  }
 </script>
 
 <script>
@@ -8,6 +17,8 @@
   import EditorSidebar from '$lib/components/EditorSidebar.svelte';
   import DocumentPreview from '$lib/components/DocumentPreview.svelte';
   let EditorComponent;
+
+  export let user;
 
   onMount(async () => {
     // load CMEditor as dynamic module so we can

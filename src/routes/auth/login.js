@@ -9,6 +9,7 @@ export const post = async ({ body }) => {
     const response = await service.getByEmail(body.email);
 
     const user = response[0][0];
+    console.log('user from db: ', user);
 
     if (!user) {
       return {
@@ -19,7 +20,7 @@ export const post = async ({ body }) => {
       };
     }
 
-    console.log('password?: ', await bcrypt.compare(body.password, user.password));
+    // console.log('password?: ', await bcrypt.compare(body.password, user.password));
     if ((await bcrypt.compare(body.password, user.password)) !== true) {
       return {
         status: 401,
@@ -36,9 +37,19 @@ export const post = async ({ body }) => {
     const duplicateUser = cookieResponse ? cookieResponse : null;
 
     if (duplicateUser) {
-      await CookieService.updateOne({ id: cookieId, email: body.email });
+      await CookieService.updateOne({
+        session_id: cookieId,
+        email: body.email,
+        name: user?.name,
+        userName: user?.userName,
+      });
     } else {
-      await CookieService.insertOne({ id: cookieId, email: body.email });
+      await CookieService.insertOne({
+        session_id: cookieId,
+        email: body.email,
+        name: user?.name,
+        userName: user?.userName,
+      });
     }
 
     const headers = {

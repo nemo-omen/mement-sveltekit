@@ -8,7 +8,7 @@ async function getHashed(pw) {
 
 export const testUsers = [
   {
-    id: uuidv4(),
+    id: '37ac14e9-273c-48b1-ab9d-c2d84562c442',
     name: 'Test User',
     userName: 'testUser123',
     email: 'test@test.com',

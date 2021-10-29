@@ -4,8 +4,7 @@ import config from 'config';
 // import jwt from 'jsonwebtoken';
 import { testUsers, testNotes } from './demo.data.js';
 
-const { host, user, password, database, notesTable, userTable, cookiesTable } =
-  config.get('db');
+const { host, user, password, database, notesTable, userTable, cookiesTable } = config.get('db');
 
 // console.log(config.get('db'));
 
@@ -17,31 +16,23 @@ connection.connect((error) => {
 });
 
 try {
-  const create = await connection.query(
-    `CREATE DATABASE IF NOT EXISTS ${database}`
-  );
+  const create = await connection.query(`CREATE DATABASE IF NOT EXISTS ${database}`);
 
-  if (create[0].serverStatus === 2)
-    console.log(`🗄️  Database ${database} created or already exists.`);
+  if (create[0].serverStatus === 2) console.log(`🗄️  Database ${database} created or already exists.`);
 
   const use = await connection.query(`USE ${database}`);
 
   if (use[0].serverStatus === 2) console.log(`Using database ${database}`);
 
-  console.log(
-    `🗑️  Dropping tables ${userTable}, ${notesTable}, ${cookiesTable} for testing...`
-  );
+  console.log(`🗑️  Dropping tables ${userTable}, ${notesTable}, ${cookiesTable} for testing...`);
 
   await connection.query(`DROP TABLE IF EXISTS \`${notesTable}\``);
   await connection.query(`DROP TABLE IF EXISTS \`${userTable}\``);
-  await connection.query(`DROP TABLE IF EXISTS \`${cookiesTable}\``);
+  // await connection.query(`DROP TABLE IF EXISTS \`${cookiesTable}\``);
 
-  console.log( 
-    `   Attempting to create empty tables ${notesTable}, ${userTable}, ${cookiesTable}...`
-  );
+  console.log(`   Attempting to create empty tables ${notesTable}, ${userTable}, ${cookiesTable}...`);
 
-  const createdUserTable =
-    await connection.query(`CREATE TABLE IF NOT EXISTS \`${userTable}\`(
+  const createdUserTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${userTable}\`(
       id char(36) NOT NULL PRIMARY KEY,
       name varchar(255) NOT NULL,
       userName varchar(255) NOT NULL UNIQUE,
@@ -56,8 +47,7 @@ try {
     }
   }
 
-  const createdNotesTable =
-    await connection.query(`CREATE TABLE IF NOT EXISTS \`${notesTable}\` (
+  const createdNotesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${notesTable}\` (
     id char(36) NOT NULL PRIMARY KEY,
     title varchar(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -74,10 +64,11 @@ try {
     }
   }
 
-  const createdCookiesTable =
-    await connection.query(`CREATE TABLE IF NOT EXISTS \`${cookiesTable}\` (
-    id char(36) NOT NULL PRIMARY KEY,
-    email varchar(255) NOT NULL
+  const createdCookiesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${cookiesTable}\` (
+    session_id char(36) NOT NULL PRIMARY KEY,
+    email varchar(255) NOT NULL,
+    name varchar(255) NOT NULL,
+    userName varchar(255) NOT NULL
   )ENGINE=InnoDB`);
 
   if (createdCookiesTable[0].serverStatus === 2) {
