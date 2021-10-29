@@ -54,7 +54,6 @@
           // console.log('transaction state: ', transaction.state.doc.toString());
         },
         parent: cmEditor,
-        contentHeight: baseHeight,
         lineWrapping: true,
       });
 
@@ -74,28 +73,22 @@
 <div id="editor" bind:this="{cmEditor}" use:cssVariables="{{ baseHeight }}"></div>
 
 <style>
-  #editor {
-    min-height: 100%;
-    width: 100%;
-    position: relative;
-  }
-  :global(.cm-content, .cm-gutter) {
-    height: calc((var(--baseHeight) - 64) * 1px);
-  }
+  /* :global(.cm-content, .cm-gutter) {
+    height: calc((var(--baseHeight)) * 1px);
+  } */
   :global(.cm-content) {
-    overflow-y: scroll;
-    overflow-wrap: break-word;
+    white-space: pre-wrap;
   }
   :global(.cm-line) {
     white-space: pre-wrap;
   }
-  /* :global(.cm-gutters) {
+  :global(.cm-gutters) {
     margin: 1px;
-  } */
-  /* :global(.cm-scroller) {
-    overflow-y: auto;
-  } */
+  }
+  :global(.cm-scroller) {
+    overflow: scroll;
+  }
   /* :global(.cm-wrap) {
-    border: 1px solid silver;
+    overflow: auto;
   } */
 </style>

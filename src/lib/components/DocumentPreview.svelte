@@ -51,14 +51,16 @@
   .preview-pane {
     border-left: 1px solid var(--primary-fg-muted);
     min-height: 100%;
-    overflow-y: auto;
+    overflow: hidden;
   }
 
   .preview-content {
     padding: 1rem;
+    // overflow-y: scroll;
   }
 
-  :global(.content) {
+  .content {
+    overflow-y: scroll;
     :global(ul) {
       :global(li) {
         margin-inline-start: 1rem;

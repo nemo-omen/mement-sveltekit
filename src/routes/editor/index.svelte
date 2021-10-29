@@ -43,5 +43,6 @@
     flex-grow: 1;
     /* min-height: 100%; */
     max-width: 100%;
+    overflow: hidden;
   }
 </style>
