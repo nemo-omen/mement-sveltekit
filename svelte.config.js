@@ -8,10 +8,10 @@ const config = {
     // target: document.body,
     ssr: false,
     vite: () => ({
-      // optimizeDeps: {
-        include: ['remark', 'remark-gfm', 'remark-rehype', 'rehype-stringify', 'unified'],
+      optimizeDeps: {
+        include: ['remark', 'remark-gfm', 'remark-rehype', 'rehype-stringify'],
         keepNames: true,
-      // },
+      },
     }),
   },
 };
