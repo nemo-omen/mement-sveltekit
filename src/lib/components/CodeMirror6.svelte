@@ -33,6 +33,20 @@
         parent: cmEditor,
         contentHeight: 600,
       });
+      const cmEdit = document.getElementById('editor');
+      const baseHeight = cmEdit.offsetHeight;
+      console.log(baseHeight);
+
+      document.querySelector('.cm-scroller').style.offsetHeight = baseHeight;
+      document.querySelector('.cm-content').style.offsetHeight = baseHeight;
+      document.querySelector('.cm-gutters').style.offsetHeight = baseHeight;
+      document.querySelector('.cm-editor').style.offsetHeight = baseHeight;
+      // document.querySelector('.cm-wrap').style.offsetHeight = baseHeight;
+      // const heightElements = [cmScroller, cmContent, cmGutter, cmWrap];
+
+      // for (const element of heightElements) {
+      //   element.style.height = baseHeight;
+      // }
     });
   }
 </script>
@@ -47,7 +61,7 @@
     position: relative;
   }
   :global(.cm-content, .cm-gutter) {
-    height: 1000px;
+    /* height: 1000px; */
     overflow: auto;
   }
   :global(.cm-gutters) {
