@@ -26,7 +26,6 @@
       });
 
       if (response.ok) {
-        console.log(await response.json());
         $userStore = { name, userName, email };
         authService.send('AUTH_SUCCESS');
       } else {

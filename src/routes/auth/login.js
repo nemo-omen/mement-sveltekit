@@ -9,7 +9,6 @@ export const post = async ({ body }) => {
     const response = await service.getByEmail(body.email);
 
     const user = response[0][0];
-    console.log('user from db: ', user);
 
     if (!user) {
       return {
@@ -20,7 +19,6 @@ export const post = async ({ body }) => {
       };
     }
 
-    // console.log('password?: ', await bcrypt.compare(body.password, user.password));
     if ((await bcrypt.compare(body.password, user.password)) !== true) {
       return {
         status: 401,

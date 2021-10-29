@@ -7,14 +7,11 @@ export const handle = async ({ request, resolve }) => {
   const cookies = cookie.parse(request.headers.cookie || '');
   request.locals.user = { ...cookies };
 
-  console.log('cookies: ', cookies);
-
   if (!cookies.session_id) {
     request.locals.user.authenticated = false;
   }
 
   const userSession = await CookieService.findOne(cookies.session_id);
-  console.log('userSession: ', userSession);
 
   let storedUser;
 
@@ -28,8 +25,6 @@ export const handle = async ({ request, resolve }) => {
   } else {
     request.locals.user.authenticated = false;
   }
-
-  console.log('request.locals.user: ', request.locals.user);
 
   const response = await resolve(request);
 

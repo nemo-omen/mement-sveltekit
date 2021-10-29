@@ -1,6 +1,5 @@
 <script context="module">
   export async function load({ page, fetch, session, stuff }) {
-    console.log('user in index session: ', session.user);
     return {
       props: {
         authenticated: session?.user.authenticated,

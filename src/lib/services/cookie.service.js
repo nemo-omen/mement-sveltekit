@@ -38,7 +38,6 @@ class CookieService {
   }
 
   static async updateOne(cookie) {
-    console.log('cookie email: ', cookie.email);
     try {
       return await db.query(`UPDATE cookies SET ? WHERE email = "${cookie.email}"`, cookie);
     } catch (error) {

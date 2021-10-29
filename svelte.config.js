@@ -8,10 +8,10 @@ const config = {
     // target: document.body,
     ssr: false,
     vite: () => ({
-      optimizeDeps: {
-        include: ['codemirror'],
+      // optimizeDeps: {
+        include: ['remark', 'remark-gfm', 'remark-rehype', 'rehype-stringify', 'unified'],
         keepNames: true,
-      },
+      // },
     }),
   },
 };

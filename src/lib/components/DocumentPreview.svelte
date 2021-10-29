@@ -32,7 +32,7 @@
       .then((file) => {
         content = String(file);
       });
-    console.log($editorStore.doc);
+    // console.log($editorStore.doc);
   });
 </script>
 

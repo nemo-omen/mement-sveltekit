@@ -1,7 +1,6 @@
 import service from '../../lib/services/user.service.js';
 
 export const post = async ({ body }) => {
-  console.log(body.email);
   if (body.email) {
     try {
       const response = await service.getByEmail(body.email);

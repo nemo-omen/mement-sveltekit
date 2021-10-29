@@ -8,8 +8,6 @@
   import Header from '$lib/components/Header.svelte';
 
   authService.onTransition((state) => {
-    console.log(state.value);
-
     if (state.value === 'unauthorized') {
       $userStore = null;
       if (browser) {

@@ -3,11 +3,8 @@
   import { EditorState } from '@codemirror/state';
   import { history, historyKeymap } from '@codemirror/history';
   import { defaultKeymap } from '@codemirror/commands';
-  import { defaultHighlightStyle } from '@codemirror/highlight';
   import { closeBrackets } from '@codemirror/closebrackets';
-  // import { oneDark } from '@codemirror/theme-one-dark';
   import { mement } from './mement-theme.js';
-  // import { colorforth } from '@codemirror/theme-colorforth';
   import { lineNumbers, highlightActiveLineGutter } from '@codemirror/gutter';
   import { markdown } from '@codemirror/lang-markdown';
   import { onMount, afterUpdate } from 'svelte';

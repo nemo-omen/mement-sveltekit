@@ -10,7 +10,6 @@ export default class UserService {
   }
 
   static async getByEmail(email) {
-    console.log('Email: ' + email);
     try {
       return await db.query(`SELECT * FROM users WHERE email = ?`, email);
     } catch (error) {
