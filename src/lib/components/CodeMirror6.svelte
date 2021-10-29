@@ -10,6 +10,7 @@
   import { onMount, afterUpdate } from 'svelte';
   import { browser } from '$app/env';
   import { editorStore } from '$lib/stores/editor.store.js';
+  import { sampleMd } from './sample.md.js';
 
   let cmEditor;
   $: baseHeight = 0;
@@ -45,7 +46,7 @@
             // defaultHighlightStyle,
             keymap.of([...defaultKeymap, ...historyKeymap]),
           ],
-          doc: `## Welcome to the editor!\n\nAt some point I'll have some good documentation here.\n\n`,
+          doc: sampleMd,
         }),
         dispatch: function (transaction) {
           view.update([transaction]);

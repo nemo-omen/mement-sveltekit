@@ -1,4 +1,5 @@
 <script>
+  import '$lib/styles/preview.scss';
   import { editorStore } from '$lib/stores/editor.store.js';
   import { onMount, afterUpdate } from 'svelte';
   import { remark } from 'remark';
@@ -38,10 +39,10 @@
 
 <div class="preview-pane">
   <DocumentPreviewToolbar />
-  <div class="preview-content">
+  <div class="preview-content flow">
     {#if content}
       <!-- {@html content} -->
-      <div class="content">{@html content}</div>
+      <div class="content flow">{@html content}</div>
     {/if}
   </div>
 </div>
@@ -54,20 +55,20 @@
   }
 
   .preview-content {
-    padding: 0.5rem 1rem;
+    padding: 1rem;
   }
 
-  :global(.content) {
-    :global(ul) {
-      :global(li) {
-        margin-inline-start: 1rem;
-      }
-    }
+  // :global(.content) {
+  //   :global(ul) {
+  //     :global(li) {
+  //       margin-inline-start: 1rem;
+  //     }
+  //   }
 
-    :global(ol) {
-      :global(li) {
-        margin-inline-start: 1rem;
-      }
-    }
-  }
+  //   :global(ol) {
+  //     :global(li) {
+  //       margin-inline-start: 1rem;
+  //     }
+  //   }
+  // }
 </style>
