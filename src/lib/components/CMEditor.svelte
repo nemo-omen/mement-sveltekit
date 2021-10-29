@@ -1,5 +1,6 @@
 <script>
-  import CodeMirror from '$lib/components/CodeMirror.svelte';
+  // import CodeMirror from '$lib/components/CodeMirror.svelte';
+  import CodeMirror6 from '$lib/components/CodeMirror6.svelte';
   import 'codemirror/mode/markdown/markdown.js';
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
@@ -20,7 +21,8 @@
 
 <div class="editor-pane">
   <Toolbar />
-  <svelte:component this="{CM}" on:change="{updateChange}" />
+  <!-- <svelte:component this="{CM}" on:change="{updateChange}" /> -->
+  <CodeMirror6 />
   <!-- <CodeMirror
     bind:this="{editor}"
     on:change="{(e) => {

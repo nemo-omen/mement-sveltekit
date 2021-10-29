@@ -9,6 +9,16 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@codemirror/closebrackets": "^0.19.0",
+    "@codemirror/commands": "^0.19.5",
+    "@codemirror/gutter": "^0.19.4",
+    "@codemirror/highlight": "^0.19.6",
+    "@codemirror/history": "^0.19.0",
+    "@codemirror/lang-markdown": "^0.19.2",
+    "@codemirror/matchbrackets": "^0.19.3",
+    "@codemirror/state": "^0.19.2",
+    "@codemirror/theme-one-dark": "^0.19.0",
+    "@codemirror/view": "^0.19.9",
     "@sveltejs/kit": "next",
     "codemirror": "^5.63.3",
     "node-sass": "^6.0.1",
