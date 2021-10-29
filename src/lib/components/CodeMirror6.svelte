@@ -5,63 +5,82 @@
   import { defaultKeymap } from '@codemirror/commands';
   import { defaultHighlightStyle } from '@codemirror/highlight';
   import { closeBrackets } from '@codemirror/closebrackets';
-  import { oneDark } from '@codemirror/theme-one-dark';
+  // import { oneDark } from '@codemirror/theme-one-dark';
+  import { mement } from './mement-theme.js';
   // import { colorforth } from '@codemirror/theme-colorforth';
   import { lineNumbers, highlightActiveLineGutter } from '@codemirror/gutter';
   import { markdown } from '@codemirror/lang-markdown';
-  import { onMount } from 'svelte';
+  import { onMount, afterUpdate } from 'svelte';
   import { browser } from '$app/env';
+  import { editorStore } from '$lib/stores/editor.store.js';
 
   let cmEditor;
+  $: baseHeight = 0;
+  let view;
+
+  function cssVariables(node, variables) {
+    setCssVariables(node, variables);
+
+    return {
+      update(variables) {
+        setCssVariables(node, variables);
+      },
+    };
+  }
+
+  function setCssVariables(node, variables) {
+    for (const name in variables) {
+      node.style.setProperty(`--${name}`, variables[name]);
+    }
+  }
 
   if (browser) {
     onMount(() => {
-      let view = new EditorView({
+      view = new EditorView({
         state: EditorState.create({
           extensions: [
             history(),
             markdown(),
-            oneDark,
+            mement,
             lineNumbers(),
             highlightActiveLineGutter(),
             closeBrackets(),
             // defaultHighlightStyle,
             keymap.of([...defaultKeymap, ...historyKeymap]),
           ],
-          doc: `Welcome to the editor!`,
+          doc: `## Welcome to the editor!\n\nAt some point I'll have some good documentation here.\n\n`,
         }),
+        dispatch: function (transaction) {
+          view.update([transaction]);
+          $editorStore = { content: transaction.state.doc.toString() };
+          // console.log('transaction state: ', transaction.state.doc.toString());
+        },
         parent: cmEditor,
         contentHeight: 600,
       });
+
       const cmEdit = document.getElementById('editor');
-      const baseHeight = cmEdit.offsetHeight;
-      console.log(baseHeight);
+      baseHeight = cmEdit.offsetHeight;
+      $editorStore = { content: view.state.doc.toString() };
+    }); // onMount
 
-      document.querySelector('.cm-scroller').style.offsetHeight = baseHeight;
-      document.querySelector('.cm-content').style.offsetHeight = baseHeight;
-      document.querySelector('.cm-gutters').style.offsetHeight = baseHeight;
-      document.querySelector('.cm-editor').style.offsetHeight = baseHeight;
-      // document.querySelector('.cm-wrap').style.offsetHeight = baseHeight;
-      // const heightElements = [cmScroller, cmContent, cmGutter, cmWrap];
-
-      // for (const element of heightElements) {
-      //   element.style.height = baseHeight;
-      // }
+    afterUpdate(() => {
+      const cmEdit = document.getElementById('editor');
+      baseHeight = cmEdit.offsetHeight;
+      $editorStore = { content: view.state.doc.toString() };
     });
-  }
+  } // if(browser)
 </script>
 
-<div id="editor" bind:this="{cmEditor}"></div>
+<div id="editor" bind:this="{cmEditor}" use:cssVariables="{{ baseHeight }}"></div>
 
 <style>
   #editor {
     min-height: 100%;
-    /* display: flex; */
-    /* background: tomato; */
     position: relative;
   }
   :global(.cm-content, .cm-gutter) {
-    /* height: 1000px; */
+    height: calc(var(--baseHeight) * 1px);
     overflow: auto;
   }
   :global(.cm-gutters) {
