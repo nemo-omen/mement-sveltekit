@@ -58,17 +58,17 @@
     padding: 1rem;
   }
 
-  // :global(.content) {
-  //   :global(ul) {
-  //     :global(li) {
-  //       margin-inline-start: 1rem;
-  //     }
-  //   }
+  :global(.content) {
+    :global(ul) {
+      :global(li) {
+        margin-inline-start: 1rem;
+      }
+    }
 
-  //   :global(ol) {
-  //     :global(li) {
-  //       margin-inline-start: 1rem;
-  //     }
-  //   }
-  // }
+    :global(ol) {
+      :global(li) {
+        margin-inline-start: 1rem;
+      }
+    }
+  }
 </style>
