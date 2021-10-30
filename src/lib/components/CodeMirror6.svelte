@@ -1,5 +1,5 @@
 <script>
-  import '$lib/styles/editor.scss';
+  import '$lib/styles/editor.css';
   import { keymap, EditorView } from '@codemirror/view';
   import { EditorState } from '@codemirror/state';
   import { history, historyKeymap } from '@codemirror/history';
@@ -76,3 +76,9 @@
 </script>
 
 <div id="editor" bind:this="{cmEditor}" use:cssVariables="{{ baseHeight }}"></div>
+
+<style>
+  /* :global(.cm-scroller) { */
+  /* height: calc(var(--baseHeight) * 1px) !important; */
+  /* } */
+</style>

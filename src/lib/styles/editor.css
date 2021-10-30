@@ -1,15 +1,14 @@
-.cm-line {
-  white-space: pre-wrap;
+.cm-editor {
+  overflow: hidden;
 }
 
-// .cm-editor {
-// position: relative;
-// height: 100%;
-// }
+.cm-content {
+  white-space: pre-wrap !important;
+}
 
-// .cm-content {
-// min-height: 90%;
-// }
+/* .cm-scroller { */
+/* overflow: auto; */
+/* } */
 
 .cm-focused .cm-cursor {
   border-width: 2px !important;

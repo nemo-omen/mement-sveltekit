@@ -54,18 +54,4 @@
   .preview-content {
     padding: 1rem;
   }
-
-  .content {
-    :global(ul) {
-      :global(li) {
-        margin-inline-start: 1rem;
-      }
-    }
-
-    :global(ol) {
-      :global(li) {
-        margin-inline-start: 1rem;
-      }
-    }
-  }
 </style>

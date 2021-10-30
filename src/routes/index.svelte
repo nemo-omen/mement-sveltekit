@@ -13,13 +13,10 @@
 </script>
 
 <script>
-  import { onMount } from 'svelte';
   import { browser } from '$app/env';
   import { goto } from '$app/navigation';
   import Login from '$lib/components/Login.svelte';
   import Register from '$lib/components/Register.svelte';
-  import EditorSidebar from '$lib/components/EditorSidebar.svelte';
-  import CMEditor from '$lib/components/CMEditor.svelte';
   import { userStore } from '$lib/stores/user.store.js';
   import MementIcon from '$lib/components/MementIcon.svelte';
   import { authService } from '$lib/machines/auth.machine.js';
