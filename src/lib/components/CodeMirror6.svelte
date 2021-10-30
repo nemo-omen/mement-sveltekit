@@ -54,7 +54,7 @@
         dispatch: function (transaction) {
           view.update([transaction]);
           $editorStore = { content: transaction.state.doc.toString() };
-          // console.log('transaction state: ', transaction.state.doc.toString());
+          console.log('transaction state: ', transaction.state.selection);
         },
         parent: cmEditor,
         lineWrapping: true,
@@ -75,9 +75,3 @@
 </script>
 
 <div id="editor" bind:this="{cmEditor}" use:cssVariables="{{ baseHeight }}"></div>
-
-<style>
-  /* :global(.cm-scroller) { */
-  /* height: calc(var(--baseHeight) * 1px) !important; */
-  /* } */
-</style>

@@ -1,9 +1,14 @@
 <script>
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
-  import Icon from '$lib/components/Icon.svelte';
+  import IconButton from '$lib/components/IconButton.svelte';
 
+  const iconSize = 1.75;
   let isDark = false;
+
+  function toggleDark() {
+    isDark = !isDark;
+  }
 
   if (browser) {
     onMount(() => {
@@ -14,34 +19,18 @@
 </script>
 
 <div class="toolbar">
-  <button class="toolbar-button">
-    {#if isDark}
-      <Icon name="lightmode" />
-    {:else}
-      <Icon name="darkmode" />
-    {/if}
-  </button>
+  {#if isDark}
+    <IconButton name="lightmode" size="{iconSize}" dispatchFn="toggleScheme" on:toggleScheme="{toggleDark}" />
+  {:else}
+    <IconButton name="darkmode" size="{iconSize}" dispatchFn="toggleScheme" on:toggleScheme="{toggleDark}" />
+  {/if}
 </div>
 
 <style lang="scss">
   .toolbar {
     display: flex;
     justify-content: flex-end;
+    padding-inline: 2rem;
     border-bottom: 1px solid var(--primary-fg-muted);
-  }
-  .toolbar-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent;
-    color: var(--link);
-    border: none;
-    transition: all 0.3s ease-out;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-  }
-  .toolbar-button:hover {
-    color: var(--primary-bg);
-    background-color: rgba(var(--link-rgb), 0.3);
   }
 </style>

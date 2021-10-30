@@ -6,10 +6,6 @@
   white-space: pre-wrap !important;
 }
 
-/* .cm-scroller { */
-/* overflow: auto; */
-/* } */
-
 .cm-focused .cm-cursor {
   border-width: 2px !important;
 }
