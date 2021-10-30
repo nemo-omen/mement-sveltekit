@@ -4,16 +4,13 @@
   import { EditorState } from '@codemirror/state';
   import { history, historyKeymap } from '@codemirror/history';
   import { defaultKeymap } from '@codemirror/commands';
-  import { closeBrackets } from '@codemirror/closebrackets';
   import { basicSetup } from '@codemirror/basic-setup';
   import { mement } from '$lib/themes/mement.js';
-  // import { dracula } from '$lib/themes/dracula.js';
-  import { lineNumbers, highlightActiveLineGutter } from '@codemirror/gutter';
   import { markdown } from '@codemirror/lang-markdown';
   import { onMount, afterUpdate } from 'svelte';
   import { browser } from '$app/env';
-  import { editorStore } from '$lib/stores/editor.store.js';
-  import { sampleMd } from './sample.md.js';
+  import { editorStore, scrollStore } from '$lib/stores/editor.store.js';
+  import { sampleMd } from '$lib/util/sample.md.js';
 
   let cmEditor;
   $: baseHeight = 0;
@@ -40,15 +37,17 @@
       view = new EditorView({
         state: EditorState.create({
           extensions: [
-            // history(),
             markdown(),
             basicSetup,
-            // dracula,
             mement,
-            // lineNumbers(),
-            // highlightActiveLineGutter(),
-            // closeBrackets(),
             keymap.of([...defaultKeymap, ...historyKeymap]),
+            EditorView.domEventHandlers({
+              scroll(event, view) {
+                if (!cmEditor?.matches(':hover')) return;
+                const scroll = event.target.scrollTop;
+                $scrollStore = { position: scroll };
+              },
+            }),
           ],
           doc: sampleMd,
         }),

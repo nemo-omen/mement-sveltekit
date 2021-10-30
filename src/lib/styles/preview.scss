@@ -1,5 +1,5 @@
 :root {
-  --flow-space: var(--size-600);
+  --flow-space: var(--size-700);
 }
 .preview-pane {
   line-height: 1.5;
@@ -11,6 +11,7 @@
 }
 
 .content {
+  font-size: 1.3rem;
   a:not([class]) {
     color: currentColor;
   }
@@ -82,12 +83,12 @@
   }
 
   h1 {
-    max-width: 15ch;
+    max-width: 40ch;
   }
 
   h2,
   h3 {
-    max-width: 25ch;
+    max-width: 50ch;
   }
 
   ul {

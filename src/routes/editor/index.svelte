@@ -18,6 +18,12 @@
   import CodeMirror6 from '$lib/components/CodeMirror6.svelte';
 
   export let user;
+
+  let editor;
+  let preview;
+  function scrollSync(first, second) {
+    second.scrollTop = first.scrollTop;
+  }
 </script>
 
 <section id="workspace">
@@ -28,10 +34,10 @@
       <PreviewToolbar />
     </div>
     <div id="workspace-panes">
-      <div class="editor-pane">
+      <div class="editor-pane" bind:this="{editor}">
         <CodeMirror6 />
       </div>
-      <div class="preview-pane">
+      <div class="preview-pane" bind:this="{preview}">
         <DocumentPreview />
       </div>
     </div>
