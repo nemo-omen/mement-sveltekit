@@ -1,6 +1,7 @@
 lockfileVersion: 5.3
 
 specifiers:
+  '@codemirror/basic-setup': ^0.19.0
   '@codemirror/closebrackets': ^0.19.0
   '@codemirror/commands': ^0.19.5
   '@codemirror/gutter': ^0.19.4
@@ -44,6 +45,7 @@ dependencies:
   xstate: 4.25.0
 
 devDependencies:
+  '@codemirror/basic-setup': 0.19.0
   '@codemirror/closebrackets': 0.19.0
   '@codemirror/commands': 0.19.5
   '@codemirror/gutter': 0.19.4
@@ -102,6 +104,26 @@ packages:
       '@lezer/common': 0.15.7
     dev: true
 
+  /@codemirror/basic-setup/0.19.0:
+    resolution: {integrity: sha512-Yhrf7fIz8+INHWOhpWeRwbs8fpc0KsydX9baD7TyYqniLVWyTi0Hwm52mr0f5O+k4YaJPeHAgT3x9gzDXZIvOw==}
+    dependencies:
+      '@codemirror/autocomplete': 0.19.4
+      '@codemirror/closebrackets': 0.19.0
+      '@codemirror/commands': 0.19.5
+      '@codemirror/comment': 0.19.0
+      '@codemirror/fold': 0.19.1
+      '@codemirror/gutter': 0.19.4
+      '@codemirror/highlight': 0.19.6
+      '@codemirror/history': 0.19.0
+      '@codemirror/language': 0.19.3
+      '@codemirror/lint': 0.19.2
+      '@codemirror/matchbrackets': 0.19.3
+      '@codemirror/rectangular-selection': 0.19.1
+      '@codemirror/search': 0.19.2
+      '@codemirror/state': 0.19.2
+      '@codemirror/view': 0.19.9
+    dev: true
+
   /@codemirror/closebrackets/0.19.0:
     resolution: {integrity: sha512-dFWX5OEVYWRNtGaifSbwIAlymnRRjxWMiMbffbAjF7p0zfGHDbdGkiT56q3Xud63h5/tQdSo5dK1iyNTzHz5vg==}
     dependencies:
@@ -121,6 +143,24 @@ packages:
       '@codemirror/text': 0.19.5
       '@codemirror/view': 0.19.9
       '@lezer/common': 0.15.7
+    dev: true
+
+  /@codemirror/comment/0.19.0:
+    resolution: {integrity: sha512-3hqAd0548fxqOBm4khFMcXVIivX8p0bSlbAuZJ6PNoUn/0wXhxkxowPp0FmFzU2+y37Z+ZQF5cRB5EREWPRIiQ==}
+    dependencies:
+      '@codemirror/state': 0.19.2
+      '@codemirror/text': 0.19.5
+      '@codemirror/view': 0.19.9
+    dev: true
+
+  /@codemirror/fold/0.19.1:
+    resolution: {integrity: sha512-3GwQpxgv03urb8BPBvX1JSjl+uMXKqngRG6qHZXSM2FefxFKvTuyL44MCb35aodtfKjGwoxizk+7b6CbAOLyOw==}
+    dependencies:
+      '@codemirror/gutter': 0.19.4
+      '@codemirror/language': 0.19.3
+      '@codemirror/rangeset': 0.19.1
+      '@codemirror/state': 0.19.2
+      '@codemirror/view': 0.19.9
     dev: true
 
   /@codemirror/gutter/0.19.4:
@@ -236,6 +276,25 @@ packages:
     resolution: {integrity: sha512-WaKTEw8JB/3QFlQzpdgRoklopcWvG8O/Xp+rxxOfFKYTaeaejpY/tjpyBBg+Ea65Ka3m7+pPp9d5j/oR2rd9NA==}
     dependencies:
       '@codemirror/state': 0.19.2
+    dev: true
+
+  /@codemirror/rectangular-selection/0.19.1:
+    resolution: {integrity: sha512-9ElnqOg3mpZIWe0prPRd1SZ48Q9QB3bR8Aocq8UtjboJSUG8ABhRrbuTZMW/rMqpBPSjVpCe9xkCCkEQMYQVmw==}
+    dependencies:
+      '@codemirror/state': 0.19.2
+      '@codemirror/text': 0.19.5
+      '@codemirror/view': 0.19.9
+    dev: true
+
+  /@codemirror/search/0.19.2:
+    resolution: {integrity: sha512-TrRxUxyJ/a7HXtUvMZhgkOUbKE1xO33UhXjn1XACEHKWhgovw1vEeEEti9dZejN8/QOOFJed39InUxmp7oQ8HA==}
+    dependencies:
+      '@codemirror/panel': 0.19.0
+      '@codemirror/rangeset': 0.19.1
+      '@codemirror/state': 0.19.2
+      '@codemirror/text': 0.19.5
+      '@codemirror/view': 0.19.9
+      crelt: 1.0.5
     dev: true
 
   /@codemirror/state/0.19.2:

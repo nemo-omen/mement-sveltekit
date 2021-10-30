@@ -1,10 +1,13 @@
 <script>
+  import '$lib/styles/editor.scss';
   import { keymap, EditorView } from '@codemirror/view';
   import { EditorState } from '@codemirror/state';
   import { history, historyKeymap } from '@codemirror/history';
   import { defaultKeymap } from '@codemirror/commands';
   import { closeBrackets } from '@codemirror/closebrackets';
-  import { mement } from './mement-theme.js';
+  import { basicSetup } from '@codemirror/basic-setup';
+  import { mement } from '$lib/themes/mement.js';
+  // import { dracula } from '$lib/themes/dracula.js';
   import { lineNumbers, highlightActiveLineGutter } from '@codemirror/gutter';
   import { markdown } from '@codemirror/lang-markdown';
   import { onMount, afterUpdate } from 'svelte';
@@ -37,13 +40,14 @@
       view = new EditorView({
         state: EditorState.create({
           extensions: [
-            history(),
+            // history(),
             markdown(),
+            basicSetup,
+            // dracula,
             mement,
-            lineNumbers(),
-            highlightActiveLineGutter(),
-            closeBrackets(),
-            // defaultHighlightStyle,
+            // lineNumbers(),
+            // highlightActiveLineGutter(),
+            // closeBrackets(),
             keymap.of([...defaultKeymap, ...historyKeymap]),
           ],
           doc: sampleMd,
@@ -59,6 +63,7 @@
 
       const cmEdit = document.getElementById('editor');
       baseHeight = cmEdit.offsetHeight;
+      console.log('baseHeight: ', baseHeight);
       $editorStore = { content: view.state.doc.toString() };
     }); // onMount
 
@@ -71,24 +76,3 @@
 </script>
 
 <div id="editor" bind:this="{cmEditor}" use:cssVariables="{{ baseHeight }}"></div>
-
-<style>
-  /* :global(.cm-content, .cm-gutter) {
-    height: calc((var(--baseHeight)) * 1px);
-  } */
-  :global(.cm-content) {
-    white-space: pre-wrap;
-  }
-  :global(.cm-line) {
-    white-space: pre-wrap;
-  }
-  :global(.cm-gutters) {
-    margin: 1px;
-  }
-  :global(.cm-scroller) {
-    overflow: scroll;
-  }
-  /* :global(.cm-wrap) {
-    overflow: auto;
-  } */
-</style>

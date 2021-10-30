@@ -6,7 +6,6 @@
   import remarkGfm from 'remark-gfm';
   import remarkRehype from 'remark-rehype';
   import rehypeStringify from 'rehype-stringify';
-  import DocumentPreviewToolbar from './DocumentPreviewToolbar.svelte';
 
   $: content = '';
 
@@ -38,7 +37,6 @@
 </script>
 
 <div class="preview-pane">
-  <DocumentPreviewToolbar />
   <div class="preview-content flow">
     {#if content}
       <!-- {@html content} -->
@@ -51,16 +49,13 @@
   .preview-pane {
     border-left: 1px solid var(--primary-fg-muted);
     min-height: 100%;
-    overflow: hidden;
   }
 
   .preview-content {
     padding: 1rem;
-    // overflow-y: scroll;
   }
 
   .content {
-    overflow-y: scroll;
     :global(ul) {
       :global(li) {
         margin-inline-start: 1rem;

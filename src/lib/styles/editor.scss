@@ -1,0 +1,26 @@
+.cm-line {
+  white-space: pre-wrap;
+}
+
+// .cm-editor {
+// position: relative;
+// height: 100%;
+// }
+
+// .cm-content {
+// min-height: 90%;
+// }
+
+.cm-focused .cm-cursor {
+  border-width: 2px !important;
+}
+
+.cm-activeLine {
+  background-color: #d8e0e9;
+}
+
+@media (prefers-color-scheme: dark) {
+  .cm-activeLine {
+    background-color: #19202c;
+  }
+}

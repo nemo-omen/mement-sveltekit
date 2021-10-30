@@ -9,6 +9,7 @@
     "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
   },
   "devDependencies": {
+    "@codemirror/basic-setup": "^0.19.0",
     "@codemirror/closebrackets": "^0.19.0",
     "@codemirror/commands": "^0.19.5",
     "@codemirror/gutter": "^0.19.4",

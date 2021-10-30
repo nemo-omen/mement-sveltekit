@@ -16,6 +16,8 @@
   import { userStore } from '$lib/stores/user.store.js';
   import EditorSidebar from '$lib/components/EditorSidebar.svelte';
   import DocumentPreview from '$lib/components/DocumentPreview.svelte';
+  import EditorToolbar from '$lib/components/EditorToolbar.svelte';
+  import PreviewToolbar from '$lib/components/PreviewToolbar.svelte';
   let EditorComponent;
 
   export let user;
@@ -32,17 +34,27 @@
 
 <section id="workspace">
   <EditorSidebar />
-  <svelte:component this="{EditorComponent}" />
-  <DocumentPreview />
+  <section class="workspace-section">
+    <div class="editor-header">
+      <EditorToolbar />
+      <PreviewToolbar />
+    </div>
+    <div class="editor-panes">
+      <svelte:component this="{EditorComponent}" />
+      <DocumentPreview />
+    </div>
+  </section>
 </section>
 
 <style>
   #workspace {
     display: grid;
-    grid-template-columns: auto 1fr 1fr;
-    flex-grow: 1;
-    /* min-height: 100%; */
-    max-width: 100%;
-    overflow: hidden;
+    grid-template-columns: auto 1fr;
+  }
+
+  .editor-header,
+  .editor-panes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 </style>

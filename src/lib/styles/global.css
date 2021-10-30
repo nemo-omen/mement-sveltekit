@@ -7,11 +7,13 @@
 
   /* HEX */
   --tomato: #ff6347;
-  --orange-yellow-crayola: #fed766ff;
+  --orange-yellow-crayola: #f1cd61;
+  /* --orange-yellow-crayola: #f1cc50; */
   --blue-munsell: #009fb7ff;
   --process-cyan: #5bc0eb;
   --independence: #465775ff;
   --cultured: #eff1f3ff;
+  /* --cultured: #d8e0e9; */
 
   /* RGB Base Values */
   --tomato-rgb: 255, 99, 71;
@@ -21,6 +23,7 @@
   --cultured-rgb: 239, 241, 243;
 
   --primary-dark: #0f131a;
+  /* --primary-dark: #19202c; */
   --primary-dark-rgb: 15, 19, 26;
   --primary-light: var(--cultured);
   --primary-light-rgb: var(--cultured-rgb);
