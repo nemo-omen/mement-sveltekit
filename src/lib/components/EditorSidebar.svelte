@@ -1,8 +1,10 @@
 <script>
+  import { onMount } from 'svelte';
   import IconButton from '$lib/components/IconButton.svelte';
   import { menuService } from '$lib/machines/menu.machine.js';
   import { userStore } from '$lib/stores/user.store.js';
   let expanded = false;
+  let dirs;
 
   menuService.onTransition((state) => {
     console.log('context: ', state.context);
@@ -12,6 +14,11 @@
   function handleIconClick(key) {
     menuService.send({ type: 'CLICK', key });
   }
+
+  onMount(async () => {
+    const dirsResponse = await fetch('/dirs');
+    console.log('response (sidebar)', response);
+  });
 </script>
 
 <aside id="workspace-sidebar">

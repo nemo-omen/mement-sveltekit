@@ -1,3 +1,5 @@
+const base = "http://localhost";
+
 async function send({ method, path, data, token }) {
   const opts = { method, headers: {} };
 
