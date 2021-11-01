@@ -4,7 +4,6 @@
   import { menuService } from '$lib/machines/menu.machine.js';
   import { userStore } from '$lib/stores/user.store.js';
 
-  let expanded = false;
   $: dirs = [];
 
   menuService.onTransition((state) => {
