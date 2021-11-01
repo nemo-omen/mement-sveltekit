@@ -1,6 +1,6 @@
 import mysql from 'mysql2/promise';
 import config from 'config';
-import { testUsers, testNotes } from './demo.data.js';
+import { testUsers, testDirectories, testNotes } from './demo.data.js';
 
 const { host, user, password, database, directoriesTable, notesTable, userTable, cookiesTable } = config.get('db');
 
@@ -28,9 +28,8 @@ try {
 
   console.log(`🗑️  Dropping tables ${userTable}, ${directoriesTable}, ${notesTable}, ${cookiesTable} for testing...`);
 
-
-  await connection.query(`DROP TABLE IF EXISTS \`${directoriesTable}\``);
   await connection.query(`DROP TABLE IF EXISTS \`${notesTable}\``);
+  await connection.query(`DROP TABLE IF EXISTS \`${directoriesTable}\``);
   await connection.query(`DROP TABLE IF EXISTS \`${userTable}\``);
   // await connection.query(`DROP TABLE IF EXISTS \`${cookiesTable}\``);
 
@@ -54,14 +53,22 @@ try {
 
   /* DIRECTORIES */
   const createdDirectoriesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${directoriesTable}\` (
-    id CharacterData(36) NOT NULL PRIMARY KEY,
+    id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     name varchar(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     type varchar(255) NOT NULL CHECK (type in ('root', 'child')),
+    parent_id int(11) DEFAULT NULL,
     FOREIGN KEY (parent_id) REFERENCES ${directoriesTable} (id)
       ON DELETE CASCADE ON UPDATE CASCADE 
   )`);
+
+  if (createdDirectoriesTable[0].serverStatus === 2) {
+    console.log(`🗃️  Table ${directoriesTable} created`);
+    for (const directory of testDirectories) {
+      await connection.query(`INSERT INTO \`${directoriesTable}\` SET ?`, directory);
+    }
+  }
 
   /* NOTES */
   const createdNotesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${notesTable}\` (
@@ -71,6 +78,7 @@ try {
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     bodyContent TEXT NOT NULL,
     user_id char(36) NOT NULL,
+    parent_id int(11) DEFAULT NULL,
     CONSTRAINT \`Note_USERId_fkey\` FOREIGN KEY (\`user_id\`) REFERENCES \`users\` (\`id\`) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (parent_id) REFERENCES ${directoriesTable} (id) ON DELETE CASCADE ON UPDATE CASCADE
     )`);
@@ -82,7 +90,7 @@ try {
     }
   }
 
-  /* COOKIES */ 
+  /* COOKIES */
   const createdCookiesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${cookiesTable}\` (
     session_id char(36) NOT NULL PRIMARY KEY,
     email varchar(255) NOT NULL,

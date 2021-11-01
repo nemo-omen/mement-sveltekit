@@ -16,11 +16,25 @@ export const testUsers = [
   },
 ];
 
+export const testDirectories = [
+  {
+    name: 'Your Notes',
+    type: 'root',
+    parent_id: null,
+  },
+  {
+    name: 'Documentation',
+    type: 'child',
+    parent_id: 1,
+  },
+];
+
 export const testNotes = [
   {
     id: uuidv4(),
     title: 'Mement Intro',
     bodyContent: sampleMd,
     user_id: testUsers[0].id,
+    parent_id: 1,
   },
 ];

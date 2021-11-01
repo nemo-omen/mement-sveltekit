@@ -1,4 +1,4 @@
-export const sampleMd = `# Welcome to mement.io
+export const sampleMd = `# Welcome to mement.to
 
 mement helps you keep track of your notes!
 
