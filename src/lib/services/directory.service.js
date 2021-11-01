@@ -1,11 +1,23 @@
 import db from '$lib/db/db.js';
-import { get, post, put, del } from './api.service.js';
 
 class DirectoryService {
 
-  async findAll() {
-    const dirsResponse = await get({method: 'GET', path: '/dirs'});
-    console.log('dirsResponse (DirectoryService): ', dirsResponse);
+  static async findAll() {
+    try {
+      const dirsResponse = await db.query(`SELECT * FROM directories`);
+      
+      if(!dirsResponse[0] && !dirsResponse[0] > 0) {
+        throw new Error('Error finding directories in database');
+        return {ok: false, message: 'Error finding directories in database'};
+      }
+
+      return {
+        ok: true,
+        data: dirsResponse[0],
+      }
+    } catch(error) {
+      console.error(error);
+    }
   }
 }
 
