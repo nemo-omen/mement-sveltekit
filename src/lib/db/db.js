@@ -2,7 +2,7 @@ import mysql from 'mysql2/promise';
 import config from 'config';
 import { testUsers, testNotes } from './demo.data.js';
 
-const { host, user, password, database, notesTable, userTable, cookiesTable } = config.get('db');
+const { host, user, password, database, directoriesTable, notesTable, userTable, cookiesTable } = config.get('db');
 
 const connection = await mysql.createConnection({ host, user, password });
 
@@ -26,21 +26,24 @@ try {
   // const grant = await connection.query(`GRANT ALL ON ${database}.* TO ${user}@${host} IDENTIFIED BY ${password}`);
   // if (grant.affectedRows > 0) console.log(`User granted all privileges on ${database}`);
 
-  console.log(`🗑️  Dropping tables ${userTable}, ${notesTable}, ${cookiesTable} for testing...`);
+  console.log(`🗑️  Dropping tables ${userTable}, ${directoriesTable}, ${notesTable}, ${cookiesTable} for testing...`);
 
+
+  await connection.query(`DROP TABLE IF EXISTS \`${directoriesTable}\``);
   await connection.query(`DROP TABLE IF EXISTS \`${notesTable}\``);
   await connection.query(`DROP TABLE IF EXISTS \`${userTable}\``);
   // await connection.query(`DROP TABLE IF EXISTS \`${cookiesTable}\``);
 
   console.log(`   Attempting to create empty tables ${notesTable}, ${userTable}, ${cookiesTable}...`);
 
+  /* USERS */
   const createdUserTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${userTable}\`(
       id char(36) NOT NULL PRIMARY KEY,
       name varchar(255) NOT NULL,
       userName varchar(255) NOT NULL UNIQUE,
       email varchar(255) NOT NULL UNIQUE,
       password varchar(255) NOT NULL
-      )ENGINE=InnoDB`);
+      )`);
 
   if (createdUserTable[0].serverStatus === 2) {
     console.log(`🗃️  Table ${userTable} created`);
@@ -49,6 +52,18 @@ try {
     }
   }
 
+  /* DIRECTORIES */
+  const createdDirectoriesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${directoriesTable}\` (
+    id CharacterData(36) NOT NULL PRIMARY KEY,
+    name varchar(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    type varchar(255) NOT NULL CHECK (type in ('root', 'child')),
+    FOREIGN KEY (parent_id) REFERENCES ${directoriesTable} (id)
+      ON DELETE CASCADE ON UPDATE CASCADE 
+  )`);
+
+  /* NOTES */
   const createdNotesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${notesTable}\` (
     id char(36) NOT NULL PRIMARY KEY,
     title varchar(255) NOT NULL,
@@ -56,8 +71,9 @@ try {
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     bodyContent TEXT NOT NULL,
     user_id char(36) NOT NULL,
-    CONSTRAINT \`Note_USERId_fkey\` FOREIGN KEY (\`user_id\`) REFERENCES \`users\` (\`id\`) ON DELETE CASCADE ON UPDATE CASCADE
-    )ENGINE=InnoDB`);
+    CONSTRAINT \`Note_USERId_fkey\` FOREIGN KEY (\`user_id\`) REFERENCES \`users\` (\`id\`) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (parent_id) REFERENCES ${directoriesTable} (id) ON DELETE CASCADE ON UPDATE CASCADE
+    )`);
 
   if (createdNotesTable[0].serverStatus === 2) {
     console.log(`🗃️  Table ${notesTable} created`);
@@ -66,12 +82,13 @@ try {
     }
   }
 
+  /* COOKIES */ 
   const createdCookiesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${cookiesTable}\` (
     session_id char(36) NOT NULL PRIMARY KEY,
     email varchar(255) NOT NULL,
     name varchar(255) NOT NULL,
     userName varchar(255) NOT NULL
-  )ENGINE=InnoDB`);
+  )`);
 
   if (createdCookiesTable[0].serverStatus === 2) {
     console.log(`🗃️  Table ${cookiesTable} created`);

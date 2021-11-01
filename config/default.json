@@ -1,9 +1,10 @@
 {
   "db": {
     "host": "localhost",
-    "user": "mement",
-    "password": "mement123!",
+    "user": "root",
+    "password": "Aliens1986!",
     "database": "mement",
+    "directoriesTable": "directories",
     "notesTable": "notes",
     "userTable": "users",
     "cookiesTable": "cookies"
