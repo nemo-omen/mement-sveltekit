@@ -1,8 +1,8 @@
 {
   "db": {
     "host": "localhost",
-    "user": "root",
-    "password": "Aliens1986!",
+    "user": "mement",
+    "password": "mement123!",
     "database": "mement",
     "notesTable": "notes",
     "userTable": "users",

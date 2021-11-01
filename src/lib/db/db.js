@@ -1,12 +1,8 @@
 import mysql from 'mysql2/promise';
 import config from 'config';
-// import dbConfig from './db.config.js';
-// import jwt from 'jsonwebtoken';
 import { testUsers, testNotes } from './demo.data.js';
 
 const { host, user, password, database, notesTable, userTable, cookiesTable } = config.get('db');
-
-// console.log(config.get('db'));
 
 const connection = await mysql.createConnection({ host, user, password });
 
@@ -23,6 +19,12 @@ try {
   const use = await connection.query(`USE ${database}`);
 
   if (use[0].serverStatus === 2) console.log(`Using database ${database}`);
+
+  // const createUSer = await connection.query(`CREATE USER IF NOT EXISTS ${user}@${host} IDENTIFIED BY ${password}`);
+  // if (createUser.affectedRows > 0) console.log('User created successfully (or already exists)');
+
+  // const grant = await connection.query(`GRANT ALL ON ${database}.* TO ${user}@${host} IDENTIFIED BY ${password}`);
+  // if (grant.affectedRows > 0) console.log(`User granted all privileges on ${database}`);
 
   console.log(`🗑️  Dropping tables ${userTable}, ${notesTable}, ${cookiesTable} for testing...`);
 

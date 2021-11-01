@@ -17,6 +17,7 @@ specifiers:
   codemirror: ^5.63.3
   config: ^3.3.6
   cookie: ^0.4.1
+  dotenv: ^10.0.0
   mysql2: ^2.3.2
   node-sass: ^6.0.1
   npm: ^8.1.1
@@ -58,6 +59,7 @@ devDependencies:
   '@codemirror/view': 0.19.9
   '@sveltejs/kit': 1.0.0-next.192_sass@1.43.4+svelte@3.44.0
   codemirror: 5.63.3
+  dotenv: 10.0.0
   node-sass: 6.0.1
   prettier: 2.4.1
   prettier-plugin-svelte: 2.4.0_prettier@2.4.1+svelte@3.44.0
@@ -874,6 +876,11 @@ packages:
   /diff/5.0.0:
     resolution: {integrity: sha512-/VTCrvm5Z0JGty/BWHljh+BAiw3IK+2j87NGMu8Nwc/f48WoDAC395uomO9ZD117ZOBaHmkX1oyLvkVM/aIT3w==}
     engines: {node: '>=0.3.1'}
+    dev: true
+
+  /dotenv/10.0.0:
+    resolution: {integrity: sha512-rlBi9d8jpv9Sf1klPjNfFAuWDjKLwTIJJ/VxtoTwIR6hnZxcEOQCZg2oIL3MWBYw5GpUDKOEnND7LXTbIpQ03Q==}
+    engines: {node: '>=10'}
     dev: true
 
   /ecc-jsbn/0.1.2:

@@ -22,6 +22,7 @@
     "@codemirror/view": "^0.19.9",
     "@sveltejs/kit": "next",
     "codemirror": "^5.63.3",
+    "dotenv": "^10.0.0",
     "node-sass": "^6.0.1",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
