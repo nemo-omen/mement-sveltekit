@@ -3,8 +3,9 @@
   import IconButton from '$lib/components/IconButton.svelte';
   import { menuService } from '$lib/machines/menu.machine.js';
   import { userStore } from '$lib/stores/user.store.js';
+  import { error } from 'xstate/lib/actions';
   let expanded = false;
-  let dirs;
+  $: dirs = [];
 
   menuService.onTransition((state) => {
     console.log('context: ', state.context);
@@ -16,8 +17,19 @@
   }
 
   onMount(async () => {
-    const dirsResponse = await fetch('/dirs');
-    console.log('response (sidebar)', dirsResponse);
+    try {
+      const dirsResponse = await fetch('/dirs');
+
+      if (!dirsResponse.ok) {
+        throw new Error('Something went wrong while fetching directory data.');
+      }
+
+      const data = await dirsResponse.json();
+      dirs = data;
+      console.log('dirs: ', dirs);
+    } catch (error) {
+      console.error(error);
+    }
   });
 </script>
 
@@ -40,6 +52,11 @@
       {#if $menuService.context.currentMenu === 'docs'}
         <div class="sidebar-item">
           {$menuService.context.currentMenu}
+          <ul class="expanded-menu-list">
+            {#each dirs as dir}
+              <li>{dir.name}</li>
+            {/each}
+          </ul>
         </div>
         <div class="sidebar-item">Something Else</div>
       {/if}
