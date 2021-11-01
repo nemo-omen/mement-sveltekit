@@ -9,6 +9,9 @@ mement is a simple note taking app
   - [ ] Document creation on wiki-link save
   - [ ] Backlinks
 - [ ] Apply markdown formatting on toolbar event
+- [ ] Drag/drop notes/directories
+- [ ] preview light/dark mode (independent of os-level user settings)
+- [ ] User preferences as JSON in db
 
 ## Project Resources and Notes
 
