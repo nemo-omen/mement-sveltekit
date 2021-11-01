@@ -17,7 +17,7 @@
 
   onMount(async () => {
     const dirsResponse = await fetch('/dirs');
-    console.log('response (sidebar)', response);
+    console.log('response (sidebar)', dirsResponse);
   });
 </script>
 
