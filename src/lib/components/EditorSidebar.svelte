@@ -3,7 +3,7 @@
   import IconButton from '$lib/components/IconButton.svelte';
   import { menuService } from '$lib/machines/menu.machine.js';
   import { userStore } from '$lib/stores/user.store.js';
-  import { error } from 'xstate/lib/actions';
+
   let expanded = false;
   $: dirs = [];
 
