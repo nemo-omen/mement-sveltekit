@@ -5,6 +5,8 @@
   import { userStore } from '$lib/stores/user.store.js';
 
   $: dirs = [];
+  $: notes = [];
+  $: tree = {};
 
   menuService.onTransition((state) => {
     console.log('context: ', state.context);
@@ -15,20 +17,67 @@
     menuService.send({ type: 'CLICK', key });
   }
 
-  onMount(async () => {
+  async function getDir(id) {
     try {
-      const dirsResponse = await fetch('/dirs');
+      const response = await fetch(`/dir/${id}`);
 
-      if (!dirsResponse.ok) {
+      if (!response.ok) {
         throw new Error('Something went wrong while fetching directory data.');
       }
 
-      const data = await dirsResponse.json();
-      dirs = data;
-      console.log('dirs: ', dirs);
+      const data = await response.json();
+      return data;
     } catch (error) {
       console.error(error);
     }
+  }
+
+  async function getDirs() {
+    try {
+      const response = await fetch(`/dirs`);
+
+      if (!response.ok) {
+        throw new Error('Something went wrong while fetching directory data.');
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  async function getNotes() {
+    try {
+      const response = await fetch('/notes');
+      if (!response.ok) {
+        throw new Error('Something went wrong while fetching notes.');
+      }
+
+      const data = await response.json();
+
+      return data;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  onMount(async () => {
+    notes = await getNotes();
+
+    console.log(notes);
+    // const root = notes.filter((note) => note.node_type === 'root');
+    // tree[root.id] = { ...root, children: [] };
+
+    // notes.forEach((note) => {
+    //   if (note.node_type === 'directory') {
+    //     tree[note.parent_id].children.push({ ...note, children: [] });
+    //   } else {
+    //     tree[note.parent_id].children.push({ ...note });
+    //   }
+    // });
+
+    // console.log('tree: ', tree);
   });
 </script>
 
@@ -52,8 +101,15 @@
         <div class="sidebar-item">
           {$menuService.context.currentMenu}
           <ul class="expanded-menu-list">
-            {#each dirs as dir}
-              <li>{dir.name}</li>
+            {#each Object.values(tree) as node}
+              <li>{node.name}</li>
+              {#if node.children}
+                <ul>
+                  {#each node.children as child}
+                    <li>{child.name ? child.name : child.title}</li>
+                  {/each}
+                </ul>
+              {/if}
             {/each}
           </ul>
         </div>

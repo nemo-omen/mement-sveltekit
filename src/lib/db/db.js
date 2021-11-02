@@ -52,35 +52,36 @@ try {
   }
 
   /* DIRECTORIES */
-  const createdDirectoriesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${directoriesTable}\` (
-    id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name varchar(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    type varchar(255) NOT NULL CHECK (type in ('root', 'child')),
-    parent_id int(11) DEFAULT NULL,
-    FOREIGN KEY (parent_id) REFERENCES ${directoriesTable} (id)
-      ON DELETE CASCADE ON UPDATE CASCADE 
-  )`);
+  // const createdDirectoriesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${directoriesTable}\` (
+  //   id int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  //   name varchar(255) NOT NULL,
+  //   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  //   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  //   type varchar(255) NOT NULL CHECK (type in ('root', 'child')),
+  //   parent_id int(11) DEFAULT NULL,
+  //   FOREIGN KEY (parent_id) REFERENCES ${directoriesTable} (id)
+  //     ON DELETE CASCADE ON UPDATE CASCADE
+  // )`);
 
-  if (createdDirectoriesTable[0].serverStatus === 2) {
-    console.log(`🗃️  Table ${directoriesTable} created`);
-    for (const directory of testDirectories) {
-      await connection.query(`INSERT INTO \`${directoriesTable}\` SET ?`, directory);
-    }
-  }
+  // if (createdDirectoriesTable[0].serverStatus === 2) {
+  //   console.log(`🗃️  Table ${directoriesTable} created`);
+  //   for (const directory of testDirectories) {
+  //     await connection.query(`INSERT INTO \`${directoriesTable}\` SET ?`, directory);
+  //   }
+  // }
 
   /* NOTES */
   const createdNotesTable = await connection.query(`CREATE TABLE IF NOT EXISTS \`${notesTable}\` (
     id char(36) NOT NULL PRIMARY KEY,
-    title varchar(255) NOT NULL,
+    name varchar(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    bodyContent TEXT NOT NULL,
+    bodyContent TEXT,
     user_id char(36) NOT NULL,
-    parent_id int(11) DEFAULT NULL,
+    parent_id char(36) DEFAULT NULL,
+    node_type varchar(20) NOT NULL,
     CONSTRAINT \`Note_USERId_fkey\` FOREIGN KEY (\`user_id\`) REFERENCES \`users\` (\`id\`) ON DELETE CASCADE ON UPDATE CASCADE,
-    FOREIGN KEY (parent_id) REFERENCES ${directoriesTable} (id) ON DELETE CASCADE ON UPDATE CASCADE
+    FOREIGN KEY (parent_id) REFERENCES \`notes\` (id) ON DELETE CASCADE ON UPDATE CASCADE
     )`);
 
   if (createdNotesTable[0].serverStatus === 2) {

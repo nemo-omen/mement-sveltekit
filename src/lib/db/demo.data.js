@@ -29,12 +29,31 @@ export const testDirectories = [
   },
 ];
 
+const rootId = uuidv4();
+
 export const testNotes = [
   {
+    id: rootId,
+    name: 'Your Notes',
+    bodyContent: null,
+    user_id: testUsers[0].id,
+    parent_id: null,
+    node_type: 'root',
+  },
+  {
     id: uuidv4(),
-    title: 'Mement Intro',
+    name: 'Documentation',
+    bodyContent: null,
+    user_id: testUsers[0].id,
+    parent_id: rootId,
+    node_type: 'directory',
+  },
+  {
+    id: uuidv4(),
+    name: 'Mement Intro',
     bodyContent: sampleMd,
     user_id: testUsers[0].id,
-    parent_id: 1,
+    parent_id: rootId,
+    node_type: 'note',
   },
 ];
