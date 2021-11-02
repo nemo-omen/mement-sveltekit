@@ -1,12 +1,15 @@
 <script>
   export let tree = {};
-  const { id, name, bodyContent, created_at, updated_at, node_type, user_id, parent_id } = tree?.data;
+  const { id, name, node_type, parent_id } = tree?.data;
   const children = tree?.children;
   let expanded = false;
 
-  function toggleExpanded() {
-    expanded = !expanded;
-    console.log('expanded: ', expanded);
+  function openFile(id) {
+    // todo - set up a store that tracks the currently open document
+    // only open doc if it is not currently open doc
+    // if it IS the currently open docc, save currently open
+    // to DB and query for new document from db
+    console.log('open: ', id);
   }
   console.log(tree);
 </script>
@@ -18,7 +21,7 @@
       {#if child.data.node_type === 'directory'}
         <svelte:self tree="{child}" />
       {:else}
-        <div class="note child">
+        <div class="note child" on:click="{() => openFile(child.data.id)}">
           {child.data.name}
         </div>
       {/if}
@@ -65,11 +68,15 @@
   }
 
   .note::before {
-    content: '🗎 ';
+    content: '🗎';
     font-size: 1em;
   }
 
   .child {
     border-left: 1px solid var(--primary-fg-muted);
+  }
+
+  details {
+    overflow: hidden;
   }
 </style>

@@ -90,20 +90,14 @@
       {/if}
       {#if $menuService.context.currentMenu === 'docs'}
         <div class="sidebar-item">
-          {$menuService.context.currentMenu}
           <DirectoryTree tree="{tree}" />
         </div>
-        <div class="sidebar-item">Something Else</div>
       {/if}
       {#if $menuService.context.currentMenu === 'user'}
-        <div class="sidebar-item">
-          {$menuService.context.currentMenu}
-        </div>
+        <div class="sidebar-item"></div>
       {/if}
       {#if $menuService.context.currentMenu === 'settings'}
-        <div class="sidebar-item">
-          {$menuService.context.currentMenu}
-        </div>
+        <div class="sidebar-item"></div>
       {/if}
     </div>
   {/if}
