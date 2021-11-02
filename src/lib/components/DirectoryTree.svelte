@@ -4,24 +4,22 @@
   const children = tree?.children;
 </script>
 
-{#if node_type === 'root' || node_type === 'directory'}
-  <ul class="expanded-menu-list">
-    <li class="li-dir" style="list-style-image: url(folder-3.svg)">
-      {name}
-      {#if children}
-        {#each children as child}
-          <svelte:self tree="{child}" />
-        {/each}
-      {/if}
-    </li>
-  </ul>
-{:else}
-  <li class="li-note" style=" list-style-image: url(file-3.svg)">
+<ul class="expanded-menu-list">
+  <li class="{node_type === 'root' ? 'li-dir' : node_type === 'directory' ? 'li-dir' : 'li-note'}">
     {name}
-    <!-- {#if children}
-    {#each children as child}
-      <svelte:self tree="{child}" />
-    {/each}
-  {/if} -->
+    {#if children}
+      {#each children as child}
+        <svelte:self tree="{child}" />
+      {/each}
+    {/if}
   </li>
-{/if}
+</ul>
+
+<style>
+  .li-note {
+    list-style-image: url('images/file-3.svg');
+  }
+  .li-dir {
+    list-style-image: url('images/folder-3.svg');
+  }
+</style>
