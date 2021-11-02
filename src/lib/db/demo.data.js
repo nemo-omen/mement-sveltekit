@@ -30,6 +30,7 @@ export const testDirectories = [
 ];
 
 const rootId = uuidv4();
+const l2DirId = uuidv4();
 
 export const testNotes = [
   {
@@ -41,8 +42,8 @@ export const testNotes = [
     node_type: 'root',
   },
   {
-    id: uuidv4(),
-    name: 'Documentation',
+    id: l2DirId,
+    name: 'Help',
     bodyContent: null,
     user_id: testUsers[0].id,
     parent_id: rootId,
@@ -54,6 +55,14 @@ export const testNotes = [
     bodyContent: sampleMd,
     user_id: testUsers[0].id,
     parent_id: rootId,
+    node_type: 'note',
+  },
+  {
+    id: uuidv4(),
+    name: 'Getting Started',
+    bodyContent: 'Test body content',
+    user_id: testUsers[0].id,
+    parent_id: l2DirId,
     node_type: 'note',
   },
 ];
