@@ -146,6 +146,6 @@
     flex-direction: column;
     gap: 0.25rem;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
   }
 </style>
