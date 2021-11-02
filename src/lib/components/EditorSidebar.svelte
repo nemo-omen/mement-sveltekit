@@ -1,6 +1,8 @@
 <script>
+  import { arrayToTree } from 'performant-array-to-tree';
   import { onMount } from 'svelte';
   import IconButton from '$lib/components/IconButton.svelte';
+  import DirectoryTree from '$lib/components/DirectoryTree.svelte';
   import { menuService } from '$lib/machines/menu.machine.js';
   import { userStore } from '$lib/stores/user.store.js';
 
@@ -64,20 +66,9 @@
 
   onMount(async () => {
     notes = await getNotes();
-
     console.log(notes);
-    // const root = notes.filter((note) => note.node_type === 'root');
-    // tree[root.id] = { ...root, children: [] };
-
-    // notes.forEach((note) => {
-    //   if (note.node_type === 'directory') {
-    //     tree[note.parent_id].children.push({ ...note, children: [] });
-    //   } else {
-    //     tree[note.parent_id].children.push({ ...note });
-    //   }
-    // });
-
-    // console.log('tree: ', tree);
+    const treeArray = arrayToTree(notes, { parentId: 'parent_id' });
+    tree = treeArray[0];
   });
 </script>
 
@@ -100,18 +91,7 @@
       {#if $menuService.context.currentMenu === 'docs'}
         <div class="sidebar-item">
           {$menuService.context.currentMenu}
-          <ul class="expanded-menu-list">
-            {#each Object.values(tree) as node}
-              <li>{node.name}</li>
-              {#if node.children}
-                <ul>
-                  {#each node.children as child}
-                    <li>{child.name ? child.name : child.title}</li>
-                  {/each}
-                </ul>
-              {/if}
-            {/each}
-          </ul>
+          <DirectoryTree tree="{tree}" />
         </div>
         <div class="sidebar-item">Something Else</div>
       {/if}

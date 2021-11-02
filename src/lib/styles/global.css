@@ -168,6 +168,12 @@ button:hover {
   background-color: transparent;
 }
 
+.ui-icon {
+  fill: currentColor;
+  width: 1em;
+  height: 1em;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --primary-fg: var(--primary-light);

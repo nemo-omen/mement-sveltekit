@@ -21,6 +21,7 @@ specifiers:
   mysql2: ^2.3.2
   node-sass: ^6.0.1
   npm: ^8.1.1
+  performant-array-to-tree: ^1.9.1
   prettier: ^2.4.1
   prettier-plugin-svelte: ^2.4.0
   rehype-stringify: ^9.0.2
@@ -41,6 +42,7 @@ dependencies:
   cookie: 0.4.1
   mysql2: 2.3.2
   npm: 8.1.1
+  performant-array-to-tree: 1.9.1
   string: 3.3.3
   uuid: 8.3.2
   xstate: 4.25.0
@@ -2352,6 +2354,10 @@ packages:
   /performance-now/2.1.0:
     resolution: {integrity: sha1-Ywn04OX6kT7BxpMHrjZLSzd8nns=}
     dev: true
+
+  /performant-array-to-tree/1.9.1:
+    resolution: {integrity: sha512-t+Hiy1HbKTVXg+mdcDUwPwAGgrLMtNUOhs2vV0M9MG2aAfnXQT9czAadksufMnf75h4xYU014HqlQ91JZ4XdlA==}
+    dev: false
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
