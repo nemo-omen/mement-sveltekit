@@ -19,36 +19,6 @@
     menuService.send({ type: 'CLICK', key });
   }
 
-  async function getDir(id) {
-    try {
-      const response = await fetch(`/dir/${id}`);
-
-      if (!response.ok) {
-        throw new Error('Something went wrong while fetching directory data.');
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
-  async function getDirs() {
-    try {
-      const response = await fetch(`/dirs`);
-
-      if (!response.ok) {
-        throw new Error('Something went wrong while fetching directory data.');
-      }
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      console.error(error);
-    }
-  }
-
   async function getNotes() {
     try {
       const response = await fetch('/notes');
