@@ -125,7 +125,8 @@
     border-right: none;
   }
   .sidebar-expanded {
-    width: 20ch;
+    max-width: 15em;
+    min-width: 12em;
     overflow-x: hidden;
     overflow-y: auto;
   }
