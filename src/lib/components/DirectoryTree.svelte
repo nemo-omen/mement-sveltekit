@@ -11,21 +11,6 @@
   console.log(tree);
 </script>
 
-<!-- <ul class="expanded-menu-list">
-  <li class="li-dir {tree.data.parent_id ? 'menu-child' : ''}" on:click="{toggleExpanded}">
-    {name}
-    {#if children}
-      {#each children as child}
-        {#if child.data.node_type === 'directory'}
-          <svelte:self tree="{child}" on:click="{child.children.length > 0 ? toggleExpanded : null}" />
-        {:else}
-          <li class="li-note menu-child">{child.data.name}</li>
-        {/if}
-      {/each}
-    {/if}
-  </li>
-</ul> -->
-
 <details class="dir">
   <summary>{name}</summary>
   {#if children}
@@ -75,33 +60,5 @@
   .note::before {
     content: '🗎 ';
     font-size: 1em;
-  }
-
-  .expanded-menu-list li {
-    color: var(--link);
-    cursor: pointer;
-  }
-
-  .expanded-menu-list li:hover {
-    color: var(--hover);
-  }
-
-  .li-dir,
-  .li-dir ul {
-    background-color: var(--primary-bg-muted);
-  }
-
-  .li-dir::marker {
-    content: '🗀 ';
-    font-size: 1em;
-  }
-
-  .li-note::marker {
-    content: '🗎 ';
-    font-size: 1em;
-  }
-
-  .child {
-    margin-inline-start: 0.5em;
   }
 </style>
