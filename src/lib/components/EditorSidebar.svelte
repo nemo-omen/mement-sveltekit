@@ -6,7 +6,6 @@
   import { menuService } from '$lib/machines/menu.machine.js';
   import { userStore } from '$lib/stores/user.store.js';
 
-  $: dirs = [];
   $: notes = [];
   $: tree = {};
 
@@ -99,6 +98,7 @@
     min-width: 12em;
     overflow-x: hidden;
     overflow-y: auto;
+    padding: 1rem;
   }
 
   .sidebar-expanded > * + * {
@@ -106,7 +106,6 @@
   }
 
   .sidebar-item {
-    padding: 0.5rem;
     display: flex;
     flex-direction: column;
     gap: 0.25rem;

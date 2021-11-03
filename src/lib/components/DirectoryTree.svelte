@@ -1,27 +1,55 @@
 <script>
+  import { browser } from '$app/env';
+  import { onMount } from 'svelte';
+  import { directoryStore } from '$lib/stores/editor.store.js';
   export let tree = {};
   const { id, name, node_type, parent_id } = tree?.data;
   const children = tree?.children;
-  let expanded = false;
+  $: open = false;
 
   function openFile(id) {
     // todo - set up a store that tracks the currently open document
     // only open doc if it is not currently open doc
-    // if it IS the currently open docc, save currently open
+    // if it IS the currently open doc, save currently open
     // to DB and query for new document from db
     console.log('open: ', id);
   }
-  console.log(tree);
+
+  function handleToggle(event) {
+    let det = event.target;
+    if (det.open) {
+      if (browser) {
+        console.log('open: ', id);
+        open = true;
+        $directoryStore[id] = 'open';
+        console.log($directoryStore);
+        window.localStorage.setItem('mement_dirs', JSON.stringify($directoryStore));
+      }
+    } else {
+      if (browser) {
+        console.log('closed: ', id);
+        open = false;
+        $directoryStore[id] = 'closed';
+        console.log($directoryStore);
+        window.localStorage.setItem('mement_dirs', JSON.stringify($directoryStore));
+      }
+    }
+  }
+
+  onMount(() => {
+    const storedDirState = JSON.parse(window.localStorage.getItem('mement_dirs'));
+    open = storedDirState[id] === 'open';
+  });
 </script>
 
-<details class="dir {parent_id ? 'child' : ''}">
+<details class="dir {parent_id ? 'child' : ''}" on:toggle="{handleToggle}" open="{open}">
   <summary>{name}</summary>
   {#if children}
     {#each children as child}
       {#if child.data.node_type === 'directory'}
         <svelte:self tree="{child}" />
       {:else}
-        <div class="note child" on:click="{() => openFile(child.data.id)}">
+        <div class="note child" on:click="{() => openFile(child.data.id)}" open="{open}">
           {child.data.name}
         </div>
       {/if}
