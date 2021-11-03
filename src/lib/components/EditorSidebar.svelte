@@ -30,6 +30,11 @@
 
       const data = await response.json();
 
+      // reverse sort by `node_type` so notes with a type of 'note'
+      // appear in array before those with a type of 'directory'
+      // - this also means that 'root' will appear first!
+      data.sort((a, b) => (a.node_type < b.node_type ? 1 : -1));
+
       return data;
     } catch (error) {
       console.error(error);
