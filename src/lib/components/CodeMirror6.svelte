@@ -63,7 +63,7 @@
         dispatch: function (transaction) {
           view.update([transaction]);
           $editorStore = { content: transaction.state.doc.toString() };
-          console.log('transaction state: ', transaction.state.selection);
+          // console.log('transaction state: ', transaction.state.selection);
         },
         parent: cmEditor,
         lineWrapping: true,
@@ -71,7 +71,7 @@
 
       const cmEdit = document.getElementById('editor');
       baseHeight = cmEdit.offsetHeight;
-      console.log('baseHeight: ', baseHeight);
+      // console.log('baseHeight: ', baseHeight);
       $editorStore = { content: view.state.doc.toString() };
     }); // onMount
 
