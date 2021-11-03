@@ -5,6 +5,9 @@
   import DirectoryTree from '$lib/components/DirectoryTree.svelte';
   import { menuService } from '$lib/machines/menu.machine.js';
   import { userStore } from '$lib/stores/user.store.js';
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
 
   $: notes = [];
   $: tree = {};
@@ -16,6 +19,11 @@
 
   function handleIconClick(key) {
     menuService.send({ type: 'CLICK', key });
+  }
+
+  function dispatchLoadDoc(event) {
+    console.log('dispatching loadDoc: ', event.detail);
+    dispatch('loadDoc', event.detail);
   }
 
   async function getNotes() {
@@ -59,7 +67,7 @@
       {/if}
       {#if $menuService.context.currentMenu === 'docs'}
         <div class="sidebar-item">
-          <DirectoryTree tree="{tree}" />
+          <DirectoryTree tree="{tree}" on:loadDoc />
         </div>
       {/if}
       {#if $menuService.context.currentMenu === 'user'}

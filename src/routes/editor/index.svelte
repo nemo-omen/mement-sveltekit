@@ -20,14 +20,22 @@
   export let user;
 
   let editor;
+  let cmEd;
   let preview;
+  let tempDoc;
+
   function scrollSync(first, second) {
     second.scrollTop = first.scrollTop;
+  }
+
+  function handleLoadDoc(event) {
+    // console.log('loadDoc event received: ', event.detail);
+    cmEd.loadDoc(event.detail);
   }
 </script>
 
 <section id="workspace">
-  <EditorSidebar />
+  <EditorSidebar on:loadDoc="{handleLoadDoc}" />
   <section class="workspace-section">
     <div id="workspace-header">
       <EditorToolbar />
@@ -35,7 +43,7 @@
     </div>
     <div id="workspace-panes">
       <div class="editor-pane" bind:this="{editor}">
-        <CodeMirror6 />
+        <CodeMirror6 bind:this="{cmEd}" />
       </div>
       <div class="preview-pane" bind:this="{preview}">
         <DocumentPreview />

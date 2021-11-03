@@ -2,6 +2,9 @@
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
   import { directoryStore, documentStore } from '$lib/stores/editor.store.js';
+  import { createEventDispatcher } from 'svelte';
+
+  const dispatch = createEventDispatcher();
   export let tree = {};
   const { id, name, node_type, parent_id } = tree?.data;
   const children = tree?.children;
@@ -15,6 +18,7 @@
     try {
       const response = await fetch(`/notes/${fileId}`);
       const data = await response.json();
+      dispatch('loadDoc', { data: data });
       if (data) $documentStore = { ...data };
     } catch (error) {
       console.error(error);
@@ -53,7 +57,7 @@
   {#if children}
     {#each children as child}
       {#if child.data.node_type === 'directory'}
-        <svelte:self tree="{child}" />
+        <svelte:self tree="{child}" on:loadDoc />
       {:else}
         <div class="note child" on:click="{() => openFile(child.data.id)}" open="{open}">
           {child.data.name}

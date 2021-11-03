@@ -16,6 +16,30 @@
   $: baseHeight = 0;
   let view;
 
+  export function loadDoc(dispatched) {
+    console.log('data: ', dispatched.data);
+    view.setState(buildEditorState(dispatched.data.bodyContent));
+  }
+
+  function buildEditorState(docContent) {
+    return EditorState.create({
+      extensions: [
+        markdown(),
+        basicSetup,
+        mement,
+        keymap.of([...defaultKeymap, ...historyKeymap]),
+        EditorView.domEventHandlers({
+          scroll(event, view) {
+            if (!cmEditor?.matches(':hover')) return;
+            const scroll = event.target.scrollTop;
+            $scrollStore = { position: scroll };
+          },
+        }),
+      ],
+      doc: docContent,
+    });
+  }
+
   function cssVariables(node, variables) {
     setCssVariables(node, variables);
 
@@ -35,22 +59,7 @@
   if (browser) {
     onMount(() => {
       view = new EditorView({
-        state: EditorState.create({
-          extensions: [
-            markdown(),
-            basicSetup,
-            mement,
-            keymap.of([...defaultKeymap, ...historyKeymap]),
-            EditorView.domEventHandlers({
-              scroll(event, view) {
-                if (!cmEditor?.matches(':hover')) return;
-                const scroll = event.target.scrollTop;
-                $scrollStore = { position: scroll };
-              },
-            }),
-          ],
-          doc: sampleMd,
-        }),
+        state: buildEditorState(sampleMd),
         dispatch: function (transaction) {
           view.update([transaction]);
           $editorStore = { content: transaction.state.doc.toString() };
