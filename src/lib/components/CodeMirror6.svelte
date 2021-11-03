@@ -9,7 +9,7 @@
   import { markdown } from '@codemirror/lang-markdown';
   import { onMount, afterUpdate } from 'svelte';
   import { browser } from '$app/env';
-  import { editorStore, scrollStore } from '$lib/stores/editor.store.js';
+  import { editorStore, scrollStore, documentStore } from '$lib/stores/editor.store.js';
   import { sampleMd } from '$lib/util/sample.md.js';
 
   let cmEditor;
@@ -19,6 +19,7 @@
   export function loadDoc(data) {
     view.setState(buildEditorState(data.bodyContent));
     $editorStore = { content: data.bodyContent };
+    $documentStore = { ...data };
   }
 
   function buildEditorState(docContent) {
