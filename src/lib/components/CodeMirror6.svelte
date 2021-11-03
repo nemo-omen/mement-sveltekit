@@ -18,6 +18,7 @@
 
   export function loadDoc(data) {
     view.setState(buildEditorState(data.bodyContent));
+    $editorStore = { content: data.bodyContent };
   }
 
   function buildEditorState(docContent) {
