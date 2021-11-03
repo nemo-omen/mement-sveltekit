@@ -21,11 +21,6 @@
     menuService.send({ type: 'CLICK', key });
   }
 
-  function dispatchLoadDoc(event) {
-    console.log('dispatching loadDoc: ', event.detail);
-    dispatch('loadDoc', event.detail);
-  }
-
   async function getNotes() {
     try {
       const response = await fetch('/notes');
