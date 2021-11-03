@@ -20,15 +20,15 @@ export default class NoteService {
 
   static async find(id) {
     try {
-      const response = await db.query(`SELECT * FROM notes WHERE id = ${id}`);
+      const response = await db.query(`SELECT * FROM notes WHERE id = '${id}'`);
 
-      if (!response[0] && !response[0] > 0) {
+      if (!response[0][0] && !response[0][0] > 0) {
         return { ok: false, message: 'Error finding notes in database' };
       }
 
       return {
         ok: true,
-        data: response[0],
+        data: response[0][0],
       };
     } catch (error) {
       console.error(error);

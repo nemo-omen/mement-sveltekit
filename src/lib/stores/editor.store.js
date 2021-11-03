@@ -5,3 +5,5 @@ export const editorStore = writable({ content: '' });
 export const scrollStore = writable({ position: 0 });
 
 export const directoryStore = writable({});
+
+export const documentStore = writable({});

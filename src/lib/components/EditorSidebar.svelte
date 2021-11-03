@@ -10,8 +10,8 @@
   $: tree = {};
 
   menuService.onTransition((state) => {
-    console.log('context: ', state.context);
-    console.log('value: ', state.value);
+    // console.log('context: ', state.context);
+    // console.log('value: ', state.value);
   });
 
   function handleIconClick(key) {
@@ -35,7 +35,7 @@
 
   onMount(async () => {
     notes = await getNotes();
-    console.log(notes);
+    // console.log(notes);
     const treeArray = arrayToTree(notes, { parentId: 'parent_id' });
     tree = treeArray[0];
   });

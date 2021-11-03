@@ -1,28 +1,34 @@
 <script>
   import { browser } from '$app/env';
   import { onMount } from 'svelte';
-  import { directoryStore } from '$lib/stores/editor.store.js';
+  import { directoryStore, documentStore } from '$lib/stores/editor.store.js';
   export let tree = {};
   const { id, name, node_type, parent_id } = tree?.data;
   const children = tree?.children;
   $: open = false;
 
-  function openFile(id) {
+  async function openFile(fileId) {
     // todo - set up a store that tracks the currently open document
     // only open doc if it is not currently open doc
     // if it IS the currently open doc, save currently open
     // to DB and query for new document from db
-    console.log('open: ', id);
+    try {
+      const response = await fetch(`/notes/${fileId}`);
+      const data = await response.json();
+      if (data) $documentStore = { ...data };
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   function handleToggle(event) {
     let det = event.target;
     if (det.open) {
       if (browser) {
-        console.log('open: ', id);
+        // console.log('open: ', id);
         open = true;
         $directoryStore[id] = 'open';
-        console.log($directoryStore);
+        // console.log($directoryStore);
         window.localStorage.setItem('mement_dirs', JSON.stringify($directoryStore));
       }
     } else {
@@ -30,7 +36,7 @@
         console.log('closed: ', id);
         open = false;
         $directoryStore[id] = 'closed';
-        console.log($directoryStore);
+        // console.log($directoryStore);
         window.localStorage.setItem('mement_dirs', JSON.stringify($directoryStore));
       }
     }
