@@ -16,9 +16,8 @@
   $: baseHeight = 0;
   let view;
 
-  export function loadDoc(dispatched) {
-    console.log('data: ', dispatched.data);
-    view.setState(buildEditorState(dispatched.data.bodyContent));
+  export function loadDoc(data) {
+    view.setState(buildEditorState(data.bodyContent));
   }
 
   function buildEditorState(docContent) {

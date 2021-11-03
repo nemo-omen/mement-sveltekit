@@ -18,7 +18,7 @@
     try {
       const response = await fetch(`/notes/${fileId}`);
       const data = await response.json();
-      dispatch('loadDoc', { data: data });
+      dispatch('loadDoc', { ...data });
       if (data) $documentStore = { ...data };
     } catch (error) {
       console.error(error);
