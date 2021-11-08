@@ -26,8 +26,8 @@
 <style lang="scss">
   .toolbar {
     display: flex;
-    justify-content: space-around;
-    padding-inline: 2rem;
+    justify-content: space-between;
+    padding-inline: clamp(1rem, 2vw, 2rem);
     border-bottom: 1px solid var(--primary-fg-muted);
   }
 </style>

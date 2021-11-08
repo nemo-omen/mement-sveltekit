@@ -1,5 +1,6 @@
 <script>
   import { createEventDispatcher } from 'svelte';
+  // import { cssVariables } from '$lib/util/actions/cssVariable.js';
   import Icon from './Icon.svelte';
   const dispatch = createEventDispatcher();
 
@@ -13,7 +14,7 @@
   }
 </script>
 
-<button class="icon-button" style="font-size: {size}rem" on:click="{sendDispatch}">
+<button class="icon-button" style="font-size: clamp({size / 1.5}em, 2vw, {size}em)" on:click="{sendDispatch}">
   <Icon name="{name}" />
 </button>
 
@@ -26,7 +27,6 @@
     color: var(--link);
     border: none;
     transition: all 0.3s ease-out;
-    font-size: 1.5rem;
     padding: 0.5rem;
   }
   .icon-button:hover {
