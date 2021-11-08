@@ -83,7 +83,7 @@
   /* #workspace-header, */
   #workspace-panes {
     display: grid;
-    grid-template-columns: 1fr 3px 1fr;
+    grid-template-columns: 1fr 10px 1fr;
     position: relative;
   }
   #workspace-header {
@@ -125,12 +125,16 @@
   .gutter-col {
     /* grid-row: 1/-1; */
     cursor: col-resize;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAeCAYAAADkftS9AAAAIklEQVQoU2M4c+bMfxAGAgYYmwGrIIiDjrELjpo5aiZeMwF+yNnOs5KSvgAAAABJRU5ErkJggg==');
     /* background-color: var(--primary-fg-muted); */
   }
 
   .gutter-col-1 {
     /* grid-column: 1; */
-    background-color: rgba(var(--primary-fg-rgb), 0.1);
-    /* border: 1px solid var(--primary-fg-muted); */
+    /* background-color: rgba(var(--primary-fg-rgb), 0.1); */
+    border-left: 1px solid var(--primary-fg-muted);
+    border-right: 1px solid var(--primary-fg-muted);
   }
 </style>
