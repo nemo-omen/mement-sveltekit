@@ -47,7 +47,7 @@
 
 <style lang="scss">
   .preview-pane {
-    border-left: 1px solid var(--primary-fg-muted);
+    // border-left: 1px solid var(--primary-fg-muted);
     min-height: 100%;
   }
 

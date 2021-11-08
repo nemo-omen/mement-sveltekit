@@ -56,7 +56,9 @@
       <div class="pane-header">
         <EditorToolbar />
       </div>
-      <CodeMirror6 bind:this="{cmEd}" />
+      <div class="pane-body">
+        <CodeMirror6 bind:this="{cmEd}" />
+      </div>
     </div>
 
     <div class="gutter-col gutter-col-1" bind:this="{gutter}"></div>
@@ -65,7 +67,9 @@
       <div class="pane-header">
         <PreviewToolbar />
       </div>
-      <DocumentPreview />
+      <div class="pane-body">
+        <DocumentPreview />
+      </div>
     </div>
   </div>
 </section>
@@ -79,7 +83,7 @@
   /* #workspace-header, */
   #workspace-panes {
     display: grid;
-    grid-template-columns: 1fr 5px 1fr;
+    grid-template-columns: 1fr 3px 1fr;
     position: relative;
   }
   #workspace-header {
@@ -96,6 +100,19 @@
     width: 100%;
     overflow: auto;
     z-index: 50;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
+    transition: all 0.3s ease-out;
+  }
+
+  .editor-pane:hover,
+  .preview-pane:hover {
+    scrollbar-color: rgba(var(--primary-fg-rgb), 0.1) var(--primary-bg-muted);
+  }
+
+  .editor-pane::-webkit-scrollbar,
+  .preview-pane::-webkit-scrollbar {
+    width: 11px;
   }
 
   .pane-header {
@@ -113,7 +130,7 @@
 
   .gutter-col-1 {
     /* grid-column: 1; */
-    background-color: var(--primary-fg-muted);
+    background-color: rgba(var(--primary-fg-rgb), 0.1);
     /* border: 1px solid var(--primary-fg-muted); */
   }
 </style>
