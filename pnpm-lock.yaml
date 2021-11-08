@@ -29,6 +29,7 @@ specifiers:
   remark-gfm: ^3.0.0
   remark-rehype: ^10.0.0
   sass: ^1.43.4
+  split-grid: ^1.0.11
   string: ^3.3.3
   svelte: ^3.42.6
   svelte-preprocess: ^4.9.8
@@ -43,6 +44,7 @@ dependencies:
   mysql2: 2.3.2
   npm: 8.1.1
   performant-array-to-tree: 1.9.1
+  split-grid: 1.0.11
   string: 3.3.3
   uuid: 8.3.2
   xstate: 4.25.0
@@ -59,7 +61,7 @@ devDependencies:
   '@codemirror/state': 0.19.2
   '@codemirror/theme-one-dark': 0.19.0
   '@codemirror/view': 0.19.9
-  '@sveltejs/kit': 1.0.0-next.192_sass@1.43.4+svelte@3.44.0
+  '@sveltejs/kit': 1.0.0-next.195_sass@1.43.4+svelte@3.44.0
   codemirror: 5.63.3
   dotenv: 10.0.0
   node-sass: 6.0.1
@@ -395,8 +397,8 @@ packages:
       picomatch: 2.3.0
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.192_sass@1.43.4+svelte@3.44.0:
-    resolution: {integrity: sha512-8LyPeEwxzMFMMr05I27j77qgvBdw92eVCH+W8+nW8kA7dkfA1e38GZXEb3qshd0Jez2Cng8MAzVMoETzGaQcng==}
+  /@sveltejs/kit/1.0.0-next.195_sass@1.43.4+svelte@3.44.0:
+    resolution: {integrity: sha512-R2X4FgzXQhp63XOik6S1Flw91S2CEA7sTxdsnNFrq3O+bIN7pQhJhkm6zgH68MZANdDcq8oIiSRkxT4M3t1+jQ==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -2743,6 +2745,10 @@ packages:
   /spdx-license-ids/3.0.10:
     resolution: {integrity: sha512-oie3/+gKf7QtpitB0LYLETe+k8SifzsX4KixvpOsbI6S0kRiRQ5MKOio8eMSAKQ17N06+wdEOXRiId+zOxo0hA==}
     dev: true
+
+  /split-grid/1.0.11:
+    resolution: {integrity: sha512-ELtFtxc3r5we5GZfe6Fi0BFFxIi2M6BY1YEntBscKRDD3zx4JVHqx2VnTRSQu1BixCYSTH3MTjKd4esI2R7EgQ==}
+    dev: false
 
   /sqlstring/2.3.2:
     resolution: {integrity: sha512-vF4ZbYdKS8OnoJAWBmMxCQDkiEBkGQYU7UZPtL8flbDRSNkhaXvRJ279ZtI6M+zDaQovVU4tuRgzK5fVhvFAhg==}
