@@ -9,7 +9,7 @@
   let toolbar;
   let observer;
   let toolbarWidth;
-  $: fontSize = toolbarWidth / 25;
+  $: fontSize = toolbarWidth / 30;
 
   function toggleDark() {
     isDark = !isDark;

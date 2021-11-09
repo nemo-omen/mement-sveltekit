@@ -98,11 +98,11 @@
     position: relative;
     height: 100%;
     width: 100%;
-    overflow: auto;
     z-index: 50;
     scrollbar-width: thin;
     scrollbar-color: transparent transparent;
     transition: all 0.3s ease-out;
+    overflow: hidden;
   }
 
   .editor-pane:hover,

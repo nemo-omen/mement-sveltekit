@@ -32,8 +32,10 @@
         EditorView.domEventHandlers({
           scroll(event, view) {
             if (!cmEditor?.matches(':hover')) return;
+            // const topLine = view.blockAtHeight();
+            // const viewFrom = topLine.from;
             const scroll = event.target.scrollTop;
-            $scrollStore = { position: scroll };
+            // $scrollStore = { position: topLine.top };
           },
         }),
       ],
@@ -70,14 +72,13 @@
       });
 
       const cmEdit = document.getElementById('editor');
-      baseHeight = cmEdit.offsetHeight;
-      // console.log('baseHeight: ', baseHeight);
+      baseHeight = cmEdit.clientHeight - 50;
       $editorStore = { content: view.state.doc.toString() };
     }); // onMount
 
     afterUpdate(() => {
       const cmEdit = document.getElementById('editor');
-      baseHeight = cmEdit.offsetHeight;
+      baseHeight = cmEdit.clientHeight - 50;
     });
   } // if(browser)
 </script>

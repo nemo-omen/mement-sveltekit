@@ -102,4 +102,28 @@
       margin-inline-start: 1rem;
     }
   }
+
+  table {
+    border-collapse: collapse;
+    margin: var(--size-800) auto;
+
+    thead tr {
+      background-color: var(--link);
+      color: var(--primary-bg);
+      // color: var(--link);
+    }
+
+    th,
+    td {
+      padding: 0.5rem 1rem;
+    }
+
+    tbody {
+      border: 1px solid var(--link);
+    }
+
+    tbody td {
+      border: 1px solid var(--link);
+    }
+  }
 }

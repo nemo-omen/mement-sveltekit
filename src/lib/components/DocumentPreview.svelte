@@ -36,21 +36,20 @@
   });
 </script>
 
-<!-- <div class="preview-pane"> -->
-<div class="preview-content flow">
-  {#if content}
-    <!-- {@html content} -->
-    <div class="content flow">{@html content}</div>
-  {/if}
+<div class="preview-doc">
+  <div class="preview-content flow">
+    {#if content}
+      <!-- {@html content} -->
+      <div class="content flow">{@html content}</div>
+    {/if}
+  </div>
 </div>
 
-<!-- </div> -->
 <style lang="scss">
-  .preview-pane {
-    // border-left: 1px solid var(--primary-fg-muted);
-    min-height: 100%;
+  .preview-doc {
+    overflow-y: scroll;
+    max-height: 94vh;
   }
-
   .preview-content {
     padding: 1rem;
   }

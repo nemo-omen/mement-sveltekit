@@ -86,7 +86,7 @@
     border-right: 1px solid var(--primary-fg-muted);
   }
   .sidebar-icons {
-    /* width: 50px; */
+    font-size: clamp(var(--size-300), 2vw, var(--size-600));
     display: flex;
     flex-direction: column;
     align-items: center;

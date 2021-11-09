@@ -6,7 +6,7 @@
   $: iconSize = 1;
   let toolbar;
   let toolbarWidth;
-  $: fontSize = toolbarWidth / 25;
+  $: fontSize = toolbarWidth / 30;
 
   function handleClick(event) {
     console.log(event);
