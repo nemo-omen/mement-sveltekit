@@ -168,6 +168,12 @@ button:hover {
   background-color: transparent;
 }
 
+.toolbar {
+  display: flex;
+  padding-inline: clamp(1rem, 2vw, 2rem);
+  margin-bottom: var(--size-400);
+}
+
 .ui-icon {
   fill: currentColor;
   width: 1em;

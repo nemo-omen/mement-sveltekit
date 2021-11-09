@@ -5,6 +5,8 @@
 
   const iconSize = 1.75;
   let isDark = false;
+  let toolbar;
+  let observer;
 
   function toggleDark() {
     isDark = !isDark;
@@ -14,23 +16,33 @@
     onMount(() => {
       const isDarkQuery = window.matchMedia('(prefers-color-scheme: dark)');
       isDark = isDarkQuery.matches;
+
+      observer = new ResizeObserver((entries) => {
+        for (let entry of entries) {
+          if (entry.contentBoxSize) {
+            const contentBoxSize = Array.isArray(entry.contentBoxSize) ? entry.contentBoxSize[0] : entry.contentBoxSize;
+            toolbar.style.fontSize = Math.max(1.5, contentBoxSize.inlineSize / 450) + 'em';
+          } else {
+            toolbar.style.fontSize = Math.max(1.5, entry.contentRect.width / 450) + 'em';
+          }
+        }
+      });
+
+      observer.observe(toolbar);
     });
   }
 </script>
 
-<div class="toolbar">
+<div class="toolbar" bind:this="{toolbar}">
   {#if isDark}
-    <IconButton name="lightmode" size="{iconSize}" dispatchFn="toggleScheme" on:toggleScheme="{toggleDark}" />
+    <IconButton name="lightmode" dispatchFn="toggleScheme" on:toggleScheme="{toggleDark}" />
   {:else}
-    <IconButton name="darkmode" size="{iconSize}" dispatchFn="toggleScheme" on:toggleScheme="{toggleDark}" />
+    <IconButton name="darkmode" dispatchFn="toggleScheme" on:toggleScheme="{toggleDark}" />
   {/if}
 </div>
 
 <style lang="scss">
   .toolbar {
-    display: flex;
     justify-content: flex-end;
-    padding-inline: 2rem;
-    border-bottom: 1px solid var(--primary-fg-muted);
   }
 </style>
