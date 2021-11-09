@@ -1,35 +1,23 @@
 <script>
   import { onMount, afterUpdate } from 'svelte';
+  import { cssVariables } from '$lib/util/actions/cssVariables.js';
   import IconButton from '$lib/components/IconButton.svelte';
 
   $: iconSize = 1;
   let toolbar;
   let toolbarWidth;
-
-  let observer;
+  $: fontSize = toolbarWidth / 400;
 
   function handleClick(event) {
     console.log(event);
   }
-
-  onMount(() => {
-    observer = new ResizeObserver((entries) => {
-      for (let entry of entries) {
-        if (entry.contentBoxSize) {
-          const contentBoxSize = Array.isArray(entry.contentBoxSize) ? entry.contentBoxSize[0] : entry.contentBoxSize;
-          toolbar.style.fontSize = Math.max(1.5, contentBoxSize.inlineSize / 450) + 'em';
-        } else {
-          toolbar.style.fontSize = Math.max(1.5, entry.contentRect.width / 450) + 'em';
-        }
-      }
-    });
-
-    observer.observe(toolbar);
-  });
 </script>
 
-<div class="toolbar" bind:this="{toolbar}">
-  <!-- <div class="toolbar" bind:this="{toolbar}" use:cssVariables="{{ iconSize: iconSize }}"> -->
+<div
+  class="toolbar"
+  bind:this="{toolbar}"
+  bind:clientWidth="{toolbarWidth}"
+  use:cssVariables="{{ fontSize: fontSize }}">
   <IconButton name="bold" dispatchFn="click" on:click="{handleClick}" />
   <IconButton name="italic" dispatchFn="click" on:click="{handleClick}" />
   <IconButton name="heading" dispatchFn="click" on:click="{handleClick}" />
@@ -47,5 +35,6 @@
 <style lang="scss">
   .toolbar {
     justify-content: space-between;
+    font-size: calc(var(--fontSize) * 1em);
   }
 </style>
