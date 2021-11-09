@@ -6,7 +6,7 @@
   $: iconSize = 1;
   let toolbar;
   let toolbarWidth;
-  $: fontSize = toolbarWidth / 400;
+  $: fontSize = toolbarWidth / 25;
 
   function handleClick(event) {
     console.log(event);
@@ -35,6 +35,6 @@
 <style lang="scss">
   .toolbar {
     justify-content: space-between;
-    font-size: calc(var(--fontSize) * 1em);
+    font-size: calc(var(--fontSize) * 1px);
   }
 </style>

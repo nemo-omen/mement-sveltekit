@@ -9,7 +9,7 @@
   let toolbar;
   let observer;
   let toolbarWidth;
-  $: fontSize = toolbarWidth / 400;
+  $: fontSize = toolbarWidth / 25;
 
   function toggleDark() {
     isDark = !isDark;
@@ -36,6 +36,6 @@
 <style lang="scss">
   .toolbar {
     justify-content: flex-end;
-    font-size: calc(var(--fontSize) * 1em);
+    font-size: calc(var(--fontSize) * 1px);
   }
 </style>
