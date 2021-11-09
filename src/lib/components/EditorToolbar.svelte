@@ -1,26 +1,42 @@
 <script>
+  import { onMount, afterUpdate } from 'svelte';
   import IconButton from '$lib/components/IconButton.svelte';
 
-  const iconSize = 1.75;
+  $: iconSize = 1.75;
+  let toolbar;
+  let toolbarWidth;
 
   function handleClick(event) {
     console.log(event);
   }
+
+  onMount(() => {
+    toolbarWidth = toolbar.clientWidth;
+    const half = toolbarWidth / 2;
+    iconSize = toolbarWidth / half;
+  });
+
+  afterUpdate(() => {
+    toolbarWidth = toolbar.clientWidth;
+    const half = toolbarWidth / 2;
+    iconSize = toolbarWidth / half;
+    console.log(iconSize);
+  });
 </script>
 
-<div class="toolbar">
-  <IconButton name="bold" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="italic" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="heading" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="strikethrough" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="ul" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="ol" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="checklist" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="quote" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="code" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="table" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="link" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
-  <IconButton name="image" size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+<div class="toolbar" bind:this="{toolbar}">
+  <IconButton name="bold" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="italic" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="heading" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="strikethrough" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="ul" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="ol" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="checklist" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="quote" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="code" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="table" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="link" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
+  <IconButton name="image" bind:size="{iconSize}" dispatchFn="click" on:click="{handleClick}" />
 </div>
 
 <style lang="scss">
