@@ -36,15 +36,15 @@
   });
 </script>
 
-<div class="preview-pane">
-  <div class="preview-content flow">
-    {#if content}
-      <!-- {@html content} -->
-      <div class="content flow">{@html content}</div>
-    {/if}
-  </div>
+<!-- <div class="preview-pane"> -->
+<div class="preview-content flow">
+  {#if content}
+    <!-- {@html content} -->
+    <div class="content flow">{@html content}</div>
+  {/if}
 </div>
 
+<!-- </div> -->
 <style lang="scss">
   .preview-pane {
     // border-left: 1px solid var(--primary-fg-muted);
